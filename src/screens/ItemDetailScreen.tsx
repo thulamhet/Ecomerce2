@@ -4,7 +4,7 @@ import { Layout, Select, SelectItem, IndexPath } from '@ui-kitten/components';
 import { ImageBackground, StyleSheet, View, FlatList, Image, TouchableOpacity,Text } from 'react-native';
 import colors from '../constants/colors';
 import icons from '../constants/icons';
-
+import database from '@react-native-firebase/database';
 const ItemDetailScreen : React.FC<{route: any, navigation: any}> = ({route, navigation}) => {
   const [selectedSize, setSelectedSize] = React.useState(new IndexPath(0));
   const [selectedColor, setSelectedColor] = React.useState(new IndexPath(0));
