@@ -1,0 +1,154 @@
+import React, { useState } from 'react';
+import * as eva from '@eva-design/eva';
+import { Layout, Select, SelectItem, IndexPath } from '@ui-kitten/components';
+import { ImageBackground, StyleSheet, View, FlatList, Image, TouchableOpacity,Text } from 'react-native';
+import colors from '../constants/colors';
+import icons from '../constants/icons';
+
+const ItemDetailScreen : React.FC<{route: any, navigation: any}> = ({route, navigation}) => {
+  const [selectedSize, setSelectedSize] = React.useState(new IndexPath(0));
+  const [selectedColor, setSelectedColor] = React.useState(new IndexPath(0));
+  const {item}  = route.params;
+  //@ts-ignore
+  const renderItem = ({item}) => {
+    return (
+      <View style={{width: 275, height: 413, marginVertical: 10, marginRight: 5}}>
+        <Image source={item} style={{flex: 1, width: 275, height: 413, borderRadius: 2}} />
+      </View>
+    )
+  }
+  const data = [
+    'XS',
+    'S',
+    'M',
+    'L',
+    'XL',
+  ];
+  const displaySizeValue = data[selectedSize.row];
+  const displayColorValue = data[selectedColor.row];
+  const renderOption = (title) => (
+    <SelectItem title={title}/>
+  );
+
+  return (
+    <Layout style={styles.container}>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity onPress={()=>{navigation.navigate('Home Screen')}}>
+          <Image style={styles.backIcon} source={icons.back}/>
+        </TouchableOpacity>
+        <Text style={styles.title}>Short dress</Text>
+        <TouchableOpacity onPress={()=>{console.log(item.uri)}}>
+          <Image style={styles.backIcon} source={icons.back}/>
+        </TouchableOpacity>
+      </View>
+      
+      <View style={{height:413}}>
+        <FlatList
+          data={item.uri}
+          renderItem={renderItem}
+          keyExtractor={item => item.index}
+          horizontal={true}
+        />
+      </View>
+  
+      <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding:15}}>
+        <Text>Size:</Text>
+        <Select
+          style={styles.select}
+          placeholder='Default'
+          value={displaySizeValue}
+          selectedIndex={selectedSize}
+          onSelect={index => setSelectedSize(index)}>
+          {data.map(renderOption)}
+        </Select>
+        <Text>Color:</Text>
+        <Select
+          style={styles.select}
+          placeholder='Default'
+          value={displayColorValue}
+          selectedIndex={selectedColor}
+          onSelect={index => setSelectedColor(index)}>
+          {data.map(renderOption)}
+        </Select>
+      </View>
+
+      <View style={styles.infoView}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text style={styles.brand}>H&M</Text>
+          <Text style={styles.brand}>{item.price}</Text>
+        </View>
+        <Text>{item.title}</Text>
+      </View>
+
+      <View style={styles.addView}>
+        <TouchableOpacity style={styles.addBtn}>
+          <Text style={{color: colors.white}}>ADD TO CART</Text>
+        </TouchableOpacity>
+      </View>
+     
+    </Layout>
+  )
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.lightGray,
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    marginTop: 50,
+    justifyContent: 'space-between',
+  },
+  backIcon: {
+    width: 30,
+    height: 30
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  select:{
+    width: 150,
+    height: 45,
+    marginVertical: 10,
+    marginHorizontal: 10,
+    borderRadius: 8,
+    borderWidth: 0.5,
+  },
+  infoView: {
+    marginHorizontal: 15,
+  },
+  brand: {
+    fontWeight: 'bold',
+    fontSize: 24,
+  },
+  addView: {
+    backgroundColor: colors.white,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    height: 112,
+    position: 'absolute',
+    bottom: 0,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 5,
+      height: 5
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+    elevation: 5,
+
+  },
+  addBtn: {
+    backgroundColor: colors.green2,
+    width: 348,
+    height:48,
+    borderRadius: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
+})
+
+export default ItemDetailScreen;
