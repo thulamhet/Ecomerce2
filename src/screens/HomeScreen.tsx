@@ -8,7 +8,8 @@ import { useNavigation } from '@react-navigation/core';
 import icons from '../constants/icons';
 import images from '../constants/images';
 import axios from 'axios';
-
+import database from '@react-native-firebase/database'; 
+// const reference = database().ref('/users');
 
 var options = {
   method: 'GET',
@@ -122,74 +123,92 @@ const redHeart = '../assets/icons/red_heart_icon.png'
 
 
 
-const HomeScreen : React.FC<{navigation: any}> = ({navigation}) => {
+const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [isLike, setLike] = useState(true);
   const [isHiddenSale, setIsHiddenSale] = useState(true);
+  var leadsRef = database().ref('/users');
+  leadsRef.on('value', function (snapshot) {
+    // snapshot.forEach(function (childSnapshot) {
+    //   var childData = childSnapshot.val();
+    // });
+  });
 
   //@ts-ignore
-  const renderItem = ({item}) => {
+  const renderItem = ({ item }) => {
     return (
       <View style={styles.listItemContainer}>
         <TouchableOpacity
-          onPress={() => {navigation.navigate('Item Detail', {item: item})}}>
-          <Image style={styles.imgItem} source={item.uri[0]}/>
+          onPress={() => {
+            navigation.navigate('Item Detail', { item: item })
+            // console.log(database())
+            // database().ref('/users').once('value', snap => console.log(snap))
+            leadsRef.on('value', function (snapshot) {
+              console.log('xx') 
+              console.log(snapshot)
+              // snapshot.forEach(function (childSnapshot) {
+              //   var childData = childSnapshot.val();
+              // });
+            });
+          }
+          }>
+          <Image style={styles.imgItem} source={item.uri[0]} />
         </TouchableOpacity>
         <View style={styles.saleView}>
-          <Text category='c1' style={{color: colors.white}}>{item.sale}</Text>
+          <Text category='c1' style={{ color: colors.white }}>{item.sale}</Text>
         </View>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.likeBtn}
-          onPress={()=> setLike(!isLike)}>
-            { isLike ?
-              <Image style={{width: 15, height: 15, resizeMode:'cover'}} source={icons.heart}/>
-              : 
-              <Image style={{width: 15, height: 15, resizeMode:'cover'}} source={icons.red_heart}/>
-            }
-          </TouchableOpacity>
-        <View style={{flexDirection:'row'}}>
-            <Image style={{width: 15, height: 15}} source={icons.star}/>
-            <Image style={{width: 15, height: 15}} source={icons.star}/>
-            <Image style={{width: 15, height: 15}} source={icons.star}/>
-            <Image style={{width: 15, height: 15}} source={icons.star}/>
-            <Image style={{width: 15, height: 15}} source={icons.star}/>
-            <Text category='p2' appearance='hint'>(10)</Text>
+          onPress={() => setLike(!isLike)}>
+          {isLike ?
+            <Image style={{ width: 15, height: 15, resizeMode: 'cover' }} source={icons.heart} />
+            :
+            <Image style={{ width: 15, height: 15, resizeMode: 'cover' }} source={icons.red_heart} />
+          }
+        </TouchableOpacity>
+        <View style={{ flexDirection: 'row' }}>
+          <Image style={{ width: 15, height: 15 }} source={icons.star} />
+          <Image style={{ width: 15, height: 15 }} source={icons.star} />
+          <Image style={{ width: 15, height: 15 }} source={icons.star} />
+          <Image style={{ width: 15, height: 15 }} source={icons.star} />
+          <Image style={{ width: 15, height: 15 }} source={icons.star} />
+          <Text category='p2' appearance='hint'>(10)</Text>
         </View>
         <Text category='label'>{item.title}</Text>
-        <Text category='c2' style={{color: 'red'}}>{item.price}</Text>
+        <Text category='c2' style={{ color: 'red' }}>{item.price}</Text>
       </View>
     )
   }
 
   //@ts-ignore
-  const renderAllItem = ({item}) => {
+  const renderAllItem = ({ item }) => {
     return (
       <View>
-        <View style={{flexDirection: 'row',}}>
+        <View style={{ flexDirection: 'row', }}>
           <Text category='h3'>{item.category}</Text>
           <TouchableOpacity>
-            <Text category='c1' style={{marginLeft: 290, marginTop: 15}}>View all</Text>
+            <Text category='c1' style={{ marginLeft: 290, marginTop: 15 }}>View all</Text>
           </TouchableOpacity>
         </View>
-        <Text category='c1' appearance='hint' style={{marginBottom: 10}}>{item.title}</Text>
+        <Text category='c1' appearance='hint' style={{ marginBottom: 10 }}>{item.title}</Text>
         <FlatList
-            data={DATA}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-            horizontal={true}
-          />
+          data={DATA}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          horizontal={true}
+        />
       </View>
     )
   }
 
   return (
     <Layout style={styles.container}>
-      <TouchableOpacity onPress={()=> navigation.navigate("Street Clothes")}>
-      <ImageBackground style={styles.imgHeader} source={images.model_woman}>
-        <Text category='h1' appearance='hint' style={styles.txtCate}>Street clothes</Text>
-      </ImageBackground>
+      <TouchableOpacity onPress={() => navigation.navigate("Street Clothes")}>
+        <ImageBackground style={styles.imgHeader} source={images.model_woman}>
+          <Text category='h1' appearance='hint' style={styles.txtCate}>Street clothes</Text>
+        </ImageBackground>
       </TouchableOpacity>
-      
-      <View style={{marginVertical: 20, marginHorizontal: 10,flex: 1}}>
+
+      <View style={{ marginVertical: 20, marginHorizontal: 10, flex: 1 }}>
 
         <FlatList
           data={DATA2}
@@ -208,26 +227,26 @@ const HomeScreen : React.FC<{navigation: any}> = ({navigation}) => {
         // </ImageBackground>
         <SaleBannerModal setIsHiddenSale={setIsHiddenSale} isHiddenSale={isHiddenSale} />
       }
-      
+
     </Layout>
   )
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, 
+    flex: 1,
     backgroundColor: colors.white,
   },
   imgHeader: {
-    width: '100%', 
-    height: 200, 
+    width: '100%',
+    height: 200,
   },
-  txtCate:{
+  txtCate: {
     marginTop: 130,
-    marginLeft: 20, 
+    marginLeft: 20,
     color: colors.darkGray,
   },
-  listItemContainer: { 
+  listItemContainer: {
     width: 140,
     height: 250,
     marginRight: 10,
@@ -237,18 +256,18 @@ const styles = StyleSheet.create({
     height: 180,
     borderRadius: 10,
   },
-  saleView: { 
-    backgroundColor: colors.red, 
-    width:30, 
-    height:15, 
-    position: 'absolute', 
-    top: 5, 
-    left: 5, 
+  saleView: {
+    backgroundColor: colors.red,
+    width: 30,
+    height: 15,
+    position: 'absolute',
+    top: 5,
+    left: 5,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  likeBtn: { 
+  likeBtn: {
     width: 30,
     height: 30,
     borderRadius: 50,
@@ -258,8 +277,8 @@ const styles = StyleSheet.create({
     right: 0,
     shadowColor: "#000",
     shadowOffset: {
-        width: 3,
-        height: 3
+      width: 3,
+      height: 3
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,

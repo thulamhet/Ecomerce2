@@ -1,19 +1,30 @@
 import React, { useState } from 'react';
 import * as eva from '@eva-design/eva';
 import { Layout, Select, SelectItem, IndexPath } from '@ui-kitten/components';
-import { ImageBackground, StyleSheet, View, FlatList, Image, TouchableOpacity,Text } from 'react-native';
+import { ImageBackground, StyleSheet, View, FlatList, Image, TouchableOpacity, Text } from 'react-native';
 import colors from '../constants/colors';
 import icons from '../constants/icons';
+import { addItem } from '../redux/action/cartAction';
 import database from '@react-native-firebase/database';
-const ItemDetailScreen : React.FC<{route: any, navigation: any}> = ({route, navigation}) => {
+import { connect } from 'react-redux';
+
+interface IItemDetailScreenProps {
+  route: any,
+  navigation: any,
+  cart: any,
+  addItem: (data: any) => void;
+}
+const ItemDetailScreen = (props: IItemDetailScreenProps) => {
+
   const [selectedSize, setSelectedSize] = React.useState(new IndexPath(0));
   const [selectedColor, setSelectedColor] = React.useState(new IndexPath(0));
-  const {item}  = route.params;
+  const { route, navigation, cart, addItem } = props;
+  const { item } = route.params;
   //@ts-ignore
-  const renderItem = ({item}) => {
+  const renderItem = ({ item }) => {
     return (
-      <View style={{width: 275, height: 413, marginVertical: 10, marginRight: 5}}>
-        <Image source={item} style={{flex: 1, width: 275, height: 413, borderRadius: 2}} />
+      <View style={{ width: 275, height: 413, marginVertical: 10, marginRight: 5 }}>
+        <Image source={item} style={{ flex: 1, width: 275, height: 413, borderRadius: 2 }} />
       </View>
     )
   }
@@ -27,22 +38,31 @@ const ItemDetailScreen : React.FC<{route: any, navigation: any}> = ({route, navi
   const displaySizeValue = data[selectedSize.row];
   const displayColorValue = data[selectedColor.row];
   const renderOption = (title) => (
-    <SelectItem title={title}/>
+    <SelectItem title={title} />
   );
+
+  const { items } = cart;
+
+  const addToBag = () => {
+    let updateItem = {}
+    const array = [...items, item];
+    updateItem = { ...cart, items: array };
+    addItem(updateItem);
+  }
 
   return (
     <Layout style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={()=>{navigation.navigate('Home Screen')}}>
-          <Image style={styles.backIcon} source={icons.back}/>
+        <TouchableOpacity onPress={() => { navigation.navigate('Home Screen') }}>
+          <Image style={styles.backIcon} source={icons.back} />
         </TouchableOpacity>
         <Text style={styles.title}>Short dress</Text>
-        <TouchableOpacity onPress={()=>{console.log(item.uri)}}>
-          <Image style={styles.backIcon} source={icons.back}/>
+        <TouchableOpacity onPress={() => { console.log(item.uri) }}>
+          <Image style={styles.backIcon} source={icons.back} />
         </TouchableOpacity>
       </View>
-      
-      <View style={{height:413}}>
+
+      <View style={{ height: 413 }}>
         <FlatList
           data={item.uri}
           renderItem={renderItem}
@@ -50,8 +70,8 @@ const ItemDetailScreen : React.FC<{route: any, navigation: any}> = ({route, navi
           horizontal={true}
         />
       </View>
-  
-      <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding:15}}>
+
+      <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 15 }}>
         <Text>Size:</Text>
         <Select
           style={styles.select}
@@ -73,7 +93,7 @@ const ItemDetailScreen : React.FC<{route: any, navigation: any}> = ({route, navi
       </View>
 
       <View style={styles.infoView}>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <Text style={styles.brand}>H&M</Text>
           <Text style={styles.brand}>{item.price}</Text>
         </View>
@@ -81,11 +101,13 @@ const ItemDetailScreen : React.FC<{route: any, navigation: any}> = ({route, navi
       </View>
 
       <View style={styles.addView}>
-        <TouchableOpacity style={styles.addBtn}>
-          <Text style={{color: colors.white}}>ADD TO CART</Text>
+        <TouchableOpacity
+          style={styles.addBtn}
+          onPress={() => { addToBag() }}>
+          <Text style={{ color: colors.white }}>ADD TO CART</Text>
         </TouchableOpacity>
       </View>
-     
+
     </Layout>
   )
 }
@@ -108,7 +130,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
   },
-  select:{
+  select: {
     width: 150,
     height: 45,
     marginVertical: 10,
@@ -144,11 +166,15 @@ const styles = StyleSheet.create({
   addBtn: {
     backgroundColor: colors.green2,
     width: 348,
-    height:48,
+    height: 48,
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
   }
 })
 
-export default ItemDetailScreen;
+const mapStateToProps = (state: any) => {
+  const { cartReducer } = state;
+  return { cart: cartReducer };
+};
+export default connect(mapStateToProps, { addItem: addItem })(ItemDetailScreen);
