@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as eva from '@eva-design/eva';
 import { Layout, Select, SelectItem, IndexPath } from '@ui-kitten/components';
-import { ImageBackground, StyleSheet, View, FlatList, Image, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, View, FlatList, Image, TouchableOpacity, Text } from 'react-native';
 import colors from '../constants/colors';
 import icons from '../constants/icons';
-import { addItem } from '../redux/action/cartAction';
+import {changeItem } from '../redux/action/cartAction';
 import database from '@react-native-firebase/database';
 import { connect } from 'react-redux';
 
@@ -12,13 +12,13 @@ interface IItemDetailScreenProps {
   route: any,
   navigation: any,
   cart: any,
-  addItem: (data: any) => void;
+  changeItem: (data: any) => void;
 }
 const ItemDetailScreen = (props: IItemDetailScreenProps) => {
 
   const [selectedSize, setSelectedSize] = React.useState(new IndexPath(0));
   const [selectedColor, setSelectedColor] = React.useState(new IndexPath(0));
-  const { route, navigation, cart, addItem } = props;
+  const { route, navigation, cart, changeItem } = props;
   const { item } = route.params;
   //@ts-ignore
   const renderItem = ({ item }) => {
@@ -47,8 +47,14 @@ const ItemDetailScreen = (props: IItemDetailScreenProps) => {
     let updateItem = {}
     const array = [...items, item];
     updateItem = { ...cart, items: array };
-    addItem(updateItem);
+    changeItem(updateItem);
+    console.log('[items :]', items.length)
+
   }
+
+  useEffect(() => {
+    console.log('[List item in detail]: ', cart)
+  }, [])
 
   return (
     <Layout style={styles.container}>
@@ -66,7 +72,7 @@ const ItemDetailScreen = (props: IItemDetailScreenProps) => {
         <FlatList
           data={item.uri}
           renderItem={renderItem}
-          keyExtractor={item => item.index}
+          keyExtractor={item => item.uri}
           horizontal={true}
         />
       </View>
@@ -103,7 +109,7 @@ const ItemDetailScreen = (props: IItemDetailScreenProps) => {
       <View style={styles.addView}>
         <TouchableOpacity
           style={styles.addBtn}
-          onPress={() => { addToBag() }}>
+          onPress={() => { addToBag()}}>
           <Text style={{ color: colors.white }}>ADD TO CART</Text>
         </TouchableOpacity>
       </View>
@@ -177,4 +183,4 @@ const mapStateToProps = (state: any) => {
   const { cartReducer } = state;
   return { cart: cartReducer };
 };
-export default connect(mapStateToProps, { addItem: addItem })(ItemDetailScreen);
+export default connect(mapStateToProps, { changeItem: changeItem })(ItemDetailScreen);

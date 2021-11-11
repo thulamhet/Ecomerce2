@@ -1,12 +1,12 @@
-import { ADD_ITEM } from "../action/cartAction";
+import { CHANGE_ITEM } from "../action/cartAction";
 
 const initialValue = {
     items: [],
 };
 
-export default function colorReducer (state = initialValue, action: any) {
+export default function cartReducer (state = initialValue, action: any) {
     switch(action.type) {
-        case ADD_ITEM:
+        case CHANGE_ITEM:
             return action.payload;
         default: 
             return state;

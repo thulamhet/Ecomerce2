@@ -1,10 +1,10 @@
 import { Dispatch } from "@reduxjs/toolkit";
 
-export const ADD_ITEM = 'ADD_ITEM';
+export const CHANGE_ITEM = 'CHANGE_ITEM';
 
-export const addItem = (data: any) => (dispatch: Dispatch) => {
+export const changeItem = (data: any) => (dispatch: Dispatch) => {
     dispatch ({
-        type: ADD_ITEM,
+        type: CHANGE_ITEM,
         payload: data
     })
 };
