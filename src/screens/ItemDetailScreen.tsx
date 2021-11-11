@@ -4,9 +4,10 @@ import { Layout, Select, SelectItem, IndexPath } from '@ui-kitten/components';
 import { StyleSheet, View, FlatList, Image, TouchableOpacity, Text } from 'react-native';
 import colors from '../constants/colors';
 import icons from '../constants/icons';
-import {changeItem } from '../redux/action/cartAction';
+import { changeItem } from '../redux/action/cartAction';
 import database from '@react-native-firebase/database';
 import { connect } from 'react-redux';
+import Annouce from '../components/PopAnnounce';
 
 interface IItemDetailScreenProps {
   route: any,
@@ -37,6 +38,8 @@ const ItemDetailScreen = (props: IItemDetailScreenProps) => {
   ];
   const displaySizeValue = data[selectedSize.row];
   const displayColorValue = data[selectedColor.row];
+
+  //@ts-ignore
   const renderOption = (title) => (
     <SelectItem title={title} />
   );
@@ -109,7 +112,10 @@ const ItemDetailScreen = (props: IItemDetailScreenProps) => {
       <View style={styles.addView}>
         <TouchableOpacity
           style={styles.addBtn}
-          onPress={() => { addToBag()}}>
+          onPress={() => {
+            addToBag()
+          }}
+        >
           <Text style={{ color: colors.white }}>ADD TO CART</Text>
         </TouchableOpacity>
       </View>

@@ -13,6 +13,10 @@ import Shop from './screens/ShopScreen';
 import BagScreen from './screens/BagScreen';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import FavouriteScreen from './screens/FavouriteScreen';
+import { NativeBaseProvider } from 'native-base';
+import Men from './screens/Shop/Men';
+import Women from './screens/Shop/Women';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -32,17 +36,20 @@ const HomeNavigator = () => {
 const App = () => {
   return (
     <ApplicationProvider {...eva} theme={{ ...eva.light }}>
-      <NavigationContainer >
-        <Provider store={store}>
-          <Tab.Navigator screenOptions={{
-            headerShown: false
-          }}>
-            <Tab.Screen name="Home" component={HomeNavigator} />
-            <Tab.Screen name="Shop" component={Shop} />
-            <Tab.Screen name="Bag" component={BagScreen} />
-          </Tab.Navigator>
-        </Provider>
-      </NavigationContainer>
+      <NativeBaseProvider>
+        <NavigationContainer >
+          <Provider store={store}>
+            <Tab.Navigator screenOptions={{
+              headerShown: false
+            }}>
+              <Tab.Screen name="Home" component={HomeNavigator} />
+              <Tab.Screen name="Shop" component={Shop} />
+              <Tab.Screen name="Bag" component={BagScreen} />
+              <Tab.Screen name="Favourite" component={FavouriteScreen} />
+            </Tab.Navigator>
+          </Provider>
+        </NavigationContainer>
+      </NativeBaseProvider>
     </ApplicationProvider>
   )
 }

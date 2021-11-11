@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/core';
 import icons from '../constants/icons';
 import images from '../constants/images';
 import axios from 'axios';
-import database from '@react-native-firebase/database'; 
+import database from '@react-native-firebase/database';
 // const reference = database().ref('/users');
 
 var options = {
@@ -53,7 +53,7 @@ const DATA = [
   },
   {
     id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Morning Dress',
+    title: 'T Dress',
     uri: listTemp,
     price: '1200$',
     sale: '10%',
@@ -61,7 +61,7 @@ const DATA = [
   },
   {
     id: '58694a0f-3da1-471f-bd96-145571e29d74',
-    title: 'Evening Dress',
+    title: 'T Shirt',
     uri: listTemp,
     price: '1200$',
     sale: '10%',
@@ -69,7 +69,7 @@ const DATA = [
   },
   {
     id: '58694a0f-3da1-471f-bd96-145571e29d32',
-    title: 'Evening Dress',
+    title: 'Silip Dress',
     uri: listTemp,
     price: '1200$',
     sale: '10%',
@@ -77,7 +77,7 @@ const DATA = [
   },
   {
     id: '58694a0f-3da1-471f-bd96-145571e29d71',
-    title: 'Evening Dress',
+    title: 'Dau buoi Dress',
     uri: listTemp,
     price: '1200$',
     sale: '10%',
@@ -103,19 +103,19 @@ const DATA2 = [
     id: '3',
     category: 'Hehe1',
     data: DATA,
-    title: 'Super summer sale'
+    title: 'Super winter sale'
   },
   {
     id: '4',
     category: 'Hehe2',
     data: DATA,
-    title: 'Super summer sale'
+    title: 'Super spring sale'
   },
   {
     id: '5',
     category: 'Hehe3',
     data: DATA,
-    title: 'Super summer sale'
+    title: 'Super autumn sale'
   },
 ]
 const heart = '../assets/icons/heart_icon.png'
@@ -143,7 +143,7 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
             // console.log(database())
             // database().ref('/users').once('value', snap => console.log(snap))
             leadsRef.on('value', function (snapshot) {
-              console.log('xx') 
+              console.log('xx')
               console.log(snapshot)
               // snapshot.forEach(function (childSnapshot) {
               //   var childData = childSnapshot.val();

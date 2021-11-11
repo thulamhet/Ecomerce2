@@ -16,9 +16,9 @@ const BagScreen = (props: IBagScreenProps) => {
   const { items } = cart;
 
   const removeItem = (data: any) => {
-    let arr:any = [];
-    items.forEach((e:any) => {
-      if(e.id !== data.id) arr.push(e);
+    let arr: any = [];
+    items.forEach((e: any) => {
+      if (e.id !== data.id) arr.push(e);
     });
     const updateItem = { ...cart, items: arr };
     changeItem(updateItem);
@@ -40,7 +40,7 @@ const BagScreen = (props: IBagScreenProps) => {
 
           <TouchableOpacity
             style={{ position: 'absolute', top: 1, right: -20, width: 20, height: 20 }}
-            onPress={() => { removeItem(item)}}>
+            onPress={() => { removeItem(item) }}>
             <Image style={{ width: 15, height: 15, resizeMode: 'cover' }} source={icons.heart} />
           </TouchableOpacity>
         </View>
