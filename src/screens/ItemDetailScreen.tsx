@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import * as eva from '@eva-design/eva';
 import { Layout, Select, SelectItem, IndexPath } from '@ui-kitten/components';
-import { StyleSheet, View, FlatList, Image, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, View, FlatList, Image, TouchableOpacity} from 'react-native';
 import colors from '../constants/colors';
 import icons from '../constants/icons';
 import { changeItem } from '../redux/action/cartAction';
 import database from '@react-native-firebase/database';
 import { connect } from 'react-redux';
 import Annouce from '../components/PopAnnounce';
+import { SearchIcon, Text } from 'native-base';
 
 interface IItemDetailScreenProps {
   route: any,
@@ -65,9 +66,9 @@ const ItemDetailScreen = (props: IItemDetailScreenProps) => {
         <TouchableOpacity onPress={() => { navigation.navigate('Home Screen') }}>
           <Image style={styles.backIcon} source={icons.back} />
         </TouchableOpacity>
-        <Text style={styles.title}>Short dress</Text>
+        <Text fontSize='2xl' bold style={styles.title}>Short dress</Text>
         <TouchableOpacity onPress={() => { console.log(item.uri) }}>
-          <Image style={styles.backIcon} source={icons.back} />
+          <SearchIcon size="5" color='black' />
         </TouchableOpacity>
       </View>
 
@@ -139,8 +140,8 @@ const styles = StyleSheet.create({
     height: 30
   },
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    // fontSize: 24,
+    // fontWeight: 'bold',
   },
   select: {
     width: 150,

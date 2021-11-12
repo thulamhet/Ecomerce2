@@ -1,34 +1,36 @@
 import React, { useState } from 'react';
-import { Layout, Text } from '@ui-kitten/components';
+import { Layout } from '@ui-kitten/components';
 import { ImageBackground, StyleSheet, View, FlatList, Image, TouchableOpacity } from 'react-native';
 import colors from '../constants/colors';
 import images from '../constants/images';
+import { Text } from 'native-base';
+
 const StreetClothesScreen = () => {
   return (
     <Layout style={styles.container}>
       <TouchableOpacity>
         <ImageBackground style={styles.imgNew} source={images.street_style}>
-          <Text category='h1' appearance='alternative' style={{marginTop: 300, marginLeft: 120}}>New collection</Text>
+          <Text fontSize='4xl' bold style={{marginTop: 300, marginLeft: 120, color: colors.white}}>New collection</Text>
         </ImageBackground>
       </TouchableOpacity>
 
       <TouchableOpacity>
         <View style={styles.saleView}>
-          <Text category='h2' appearance='alternative' style={{color: colors.green2, marginLeft: 20}}>Summer</Text>
-          <Text category='h2' appearance='alternative' style={{color: colors.green2, marginLeft: 20}}>sale</Text>
+          <Text fontSize='4xl' bold style={{color: colors.green2, marginLeft: 20}}>Summer</Text>
+          <Text fontSize='4xl' bold style={{color: colors.green2, marginLeft: 20}}>sale</Text>
         </View>
       </TouchableOpacity>
 
       <TouchableOpacity>
         <ImageBackground style={styles.imgBlack} source={images.black_people}>
-          <Text category='h1' appearance='alternative' style={{marginTop: 150, marginLeft: 10}}>Black</Text>
+          <Text fontSize='4xl' bold style={{marginTop: 150, marginLeft: 10, color: colors.white}}>Black</Text>
         </ImageBackground>
       </TouchableOpacity>
 
       <TouchableOpacity>
         <ImageBackground style={styles.imgWoman} source={images.men_hoddies}>
-          <Text category='h1' appearance='alternative' style={{marginTop: 140, marginLeft: 30}}>Men's</Text>
-          <Text category='h1' appearance='alternative' style={{marginLeft: 30}}>hoodies</Text>
+          <Text fontSize='4xl' bold style={{marginTop: 140, marginLeft: 30}}>Men's</Text>
+          <Text fontSize='4xl' bold style={{marginLeft: 30}}>hoodies</Text>
         </ImageBackground>
       </TouchableOpacity>
     </Layout>
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
   imgWoman: {
     position: 'absolute',
     width: 290,
-    height: 435,
+    height: 475,
     left: 185,
     top: 366,
   },

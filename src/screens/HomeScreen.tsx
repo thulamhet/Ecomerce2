@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
+import { ApplicationProvider, IconRegistry, Layout } from '@ui-kitten/components';
 import { ImageBackground, StyleSheet, View, FlatList, Image, TouchableOpacity } from 'react-native';
 import colors from '../constants/colors';
 import SaleBannerModal from '../components/SaleBannerModal';
@@ -8,7 +8,8 @@ import { useNavigation } from '@react-navigation/core';
 import icons from '../constants/icons';
 import images from '../constants/images';
 import axios from 'axios';
-import database from '@react-native-firebase/database';
+import database from '@react-native-firebase/database'; 
+import { Text } from 'native-base';
 // const reference = database().ref('/users');
 
 var options = {
@@ -77,7 +78,7 @@ const DATA = [
   },
   {
     id: '58694a0f-3da1-471f-bd96-145571e29d71',
-    title: 'Dau buoi Dress',
+    title: 'Dau Dress',
     uri: listTemp,
     price: '1200$',
     sale: '10%',
@@ -143,7 +144,7 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
             // console.log(database())
             // database().ref('/users').once('value', snap => console.log(snap))
             leadsRef.on('value', function (snapshot) {
-              console.log('xx')
+              console.log('xx') 
               console.log(snapshot)
               // snapshot.forEach(function (childSnapshot) {
               //   var childData = childSnapshot.val();
@@ -154,7 +155,7 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           <Image style={styles.imgItem} source={item.uri[0]} />
         </TouchableOpacity>
         <View style={styles.saleView}>
-          <Text category='c1' style={{ color: colors.white }}>{item.sale}</Text>
+          <Text fontSize='xs' style={{ color: colors.white }}>{item.sale}</Text>
         </View>
         <TouchableOpacity
           style={styles.likeBtn}
@@ -171,10 +172,10 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
           <Image style={{ width: 15, height: 15 }} source={icons.star} />
           <Image style={{ width: 15, height: 15 }} source={icons.star} />
           <Image style={{ width: 15, height: 15 }} source={icons.star} />
-          <Text category='p2' appearance='hint'>(10)</Text>
+          <Text fontSize='xs'>(10)</Text>
         </View>
-        <Text category='label'>{item.title}</Text>
-        <Text category='c2' style={{ color: 'red' }}>{item.price}</Text>
+        <Text fontSize='lg'>{item.title}</Text>
+        <Text style={{ color: 'red' }}>{item.price}</Text>
       </View>
     )
   }
@@ -184,12 +185,12 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     return (
       <View>
         <View style={{ flexDirection: 'row', }}>
-          <Text category='h3'>{item.category}</Text>
+          <Text fontSize='3xl' bold>{item.category}</Text>
           <TouchableOpacity>
-            <Text category='c1' style={{ marginLeft: 290, marginTop: 15 }}>View all</Text>
+            <Text style={{ marginLeft: 290, marginTop: 15 }}>View all</Text>
           </TouchableOpacity>
         </View>
-        <Text category='c1' appearance='hint' style={{ marginBottom: 10 }}>{item.title}</Text>
+        <Text style={{ marginBottom: 10 }}>{item.title}</Text>
         <FlatList
           data={DATA}
           renderItem={renderItem}
@@ -204,7 +205,7 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     <Layout style={styles.container}>
       <TouchableOpacity onPress={() => navigation.navigate("Street Clothes")}>
         <ImageBackground style={styles.imgHeader} source={images.model_woman}>
-          <Text category='h1' appearance='hint' style={styles.txtCate}>Street clothes</Text>
+          <Text fontSize='3xl' bold  style={styles.txtCate}>Street clothes</Text>
         </ImageBackground>
       </TouchableOpacity>
 
@@ -244,7 +245,7 @@ const styles = StyleSheet.create({
   txtCate: {
     marginTop: 130,
     marginLeft: 20,
-    color: colors.darkGray,
+    color: colors.black,
   },
   listItemContainer: {
     width: 140,
@@ -259,7 +260,7 @@ const styles = StyleSheet.create({
   saleView: {
     backgroundColor: colors.red,
     width: 30,
-    height: 15,
+    height: 20,
     position: 'absolute',
     top: 5,
     left: 5,

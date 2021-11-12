@@ -9,14 +9,17 @@ import TestScreen from './screens/BagScreen';
 import * as eva from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import StreetClothesScreen from './screens/StreetClothesScreen';
-import Shop from './screens/ShopScreen';
+import Shop from './screens/Shop/ShopScreen';
 import BagScreen from './screens/BagScreen';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import FavouriteScreen from './screens/FavouriteScreen';
-import { NativeBaseProvider } from 'native-base';
+import { CheckIcon, NativeBaseProvider } from 'native-base';
 import Men from './screens/Shop/Men';
 import Women from './screens/Shop/Women';
+import ProfileScreen from './screens/Profile/ProfileScreen';
+import { Image } from 'react-native';
+import icons from './constants/icons';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -39,13 +42,34 @@ const App = () => {
       <NativeBaseProvider>
         <NavigationContainer >
           <Provider store={store}>
-            <Tab.Navigator screenOptions={{
-              headerShown: false
-            }}>
+            <Tab.Navigator screenOptions={
+              {headerShown: false}
+              
+              // ({ route }) => ({
+              //   tabBarIcon: ({ color, size }) => {
+              //     // const icons = {
+              //     //   Home: 'home',
+              //     //   Profile: 'account',
+              //     // };
+
+              //     return (
+              //       // <Image style={{ width: 15, height: 15, resizeMode: 'cover' }} source={icons.heart} />
+              //       <CheckIcon size="5" mt="0.5" color="emerald.500" />
+              //     );
+              //   },
+
+              // }
+              // )
+
+
+            }
+            >
               <Tab.Screen name="Home" component={HomeNavigator} />
-              <Tab.Screen name="Shop" component={Shop} />
+              <Tab.Screen name="Shop" component={Shop}
+              />
               <Tab.Screen name="Bag" component={BagScreen} />
               <Tab.Screen name="Favourite" component={FavouriteScreen} />
+              <Tab.Screen name="Profile" component={ProfileScreen} />
             </Tab.Navigator>
           </Provider>
         </NavigationContainer>

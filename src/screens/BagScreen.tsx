@@ -1,4 +1,4 @@
-import { Text } from "@ui-kitten/components";
+import { Fab, Icon, MinusIcon, Text, Pl, Spinner, HStack, Heading } from "native-base";
 import React from "react"
 import { View, StyleSheet, FlatList, Image, TouchableOpacity } from "react-native"
 import { connect } from "react-redux";
@@ -31,17 +31,18 @@ const BagScreen = (props: IBagScreenProps) => {
       <View style={styles.itemView}>
         <Image source={item.uri[0]} style={{ width: 90, height: 90, borderRadius: 8 }} />
         <View style={{ paddingHorizontal: 15 }}>
-          <Text category='label'>{item.title}</Text>
+          <Text fontSize='md'>{item.title}</Text>
           <View style={{ flexDirection: 'row', padding: 3 }}>
             <Text>Color: </Text>
             <Text>Size: </Text>
           </View>
           <Text style={{ justifyContent: 'flex-end' }}>{item.price}</Text>
-
+        
           <TouchableOpacity
             style={{ position: 'absolute', top: 1, right: -20, width: 20, height: 20 }}
             onPress={() => { removeItem(item) }}>
-            <Image style={{ width: 15, height: 15, resizeMode: 'cover' }} source={icons.heart} />
+            {/* <Image style={{ width: 15, height: 15, resizeMode: 'cover' }} source={icons.heart} /> */}
+            <MinusIcon size="3" mt="0.5" color="black" />
           </TouchableOpacity>
         </View>
       </View>
@@ -53,7 +54,7 @@ const BagScreen = (props: IBagScreenProps) => {
       <TouchableOpacity
         onPress={() => console.log(cart.items[0].uri)}
       >
-        <Text style={{ margin: 15 }} category='h1'>My Bag</Text>
+        <Text style={{ margin: 15 }} fontSize='5xl'>My Bag</Text>
       </TouchableOpacity>
       <View>
         <FlatList
@@ -89,12 +90,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     flexDirection: 'row',
     margin: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 5,
+      height: 5
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+
   },
   coView: {
     backgroundColor: colors.white,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '110%',
+    width: '100%',
     height: 112,
     position: 'absolute',
     bottom: 0,

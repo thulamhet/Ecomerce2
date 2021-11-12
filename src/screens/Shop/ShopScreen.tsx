@@ -1,25 +1,23 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react"
 import { View, StyleSheet, TouchableOpacity, Image } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context";
-import icons from "../constants/icons";
-import { Layout, Text } from '@ui-kitten/components';
-import colors from "../constants/colors";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Men from "./Shop/Men";
-import Women from "./Shop/Women";
+import icons from "../../constants/icons";
+import { Layout } from '@ui-kitten/components';
+import Men from "./Men";
+import Women from "./Women";
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import Kid from "./Kid";
+import { Text, SearchIcon } from "native-base";
 
-const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 const ShopNavigator = () => {
   return (
-      <Tab.Navigator>
-        <Tab.Screen name="Men" component={Men}/>
-        <Tab.Screen name="Women" component={Women}/>
-      </Tab.Navigator>
+    <Tab.Navigator>
+      <Tab.Screen name="Men" component={Men} />
+      <Tab.Screen name="Women" component={Women} />
+      <Tab.Screen name="Kid" component={Kid} />
+    </Tab.Navigator>
   )
 }
 
@@ -31,13 +29,13 @@ const Shop = () => {
         <TouchableOpacity onPress={() => { () => { } }}>
           <Image style={styles.backIcon} source={icons.back} />
         </TouchableOpacity>
-        <Text category='h6'>Categories</Text>
+        <Text fontSize='2xl' bold >Categories</Text>
         <TouchableOpacity onPress={() => { () => { } }}>
-          <Image style={styles.backIcon} source={icons.back} />
+          <SearchIcon size="5" mt="0.5" color="black" style={styles.backIcon}/>
         </TouchableOpacity>
       </View>
-      <ShopNavigator/>
-      
+      <ShopNavigator />
+
     </Layout>
   )
 }

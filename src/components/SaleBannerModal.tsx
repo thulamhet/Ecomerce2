@@ -1,6 +1,6 @@
+import { Text } from 'native-base';
 import React from 'react';
 import { ImageBackground, StyleSheet, TouchableOpacity, Modal } from 'react-native';
-import { Text } from '@ui-kitten/components';
 import colors from '../constants/colors';
 import images from '../constants/images';
 
@@ -18,10 +18,10 @@ const SaleBannerModal : React.FC<SaleBannerModalProps> = ({setIsHiddenSale, isHi
     //   >
 
     <ImageBackground style={styles.imgSale} source={images.couple}>
-          <Text category='h1' appearance='hint' style={{...styles.txtCate, marginTop: 400, color: colors.white, lineHeight:48}}>Fashion sale</Text>
+          <Text fontSize='5xl' bold style={{...styles.txtCate, marginTop: 400, color: colors.white, lineHeight:48}}>Fashion sale</Text>
           <TouchableOpacity style={styles.checkBtn}
             onPress={()=> setIsHiddenSale(false)}>
-            <Text category='s1' style={{color: colors.white}}>Check</Text>
+            <Text fontSize='md' bold style={{color: colors.white}}>Check</Text>
           </TouchableOpacity>
     </ImageBackground>
 
