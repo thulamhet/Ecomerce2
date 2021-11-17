@@ -8,9 +8,13 @@ import { useNavigation } from '@react-navigation/core';
 import icons from '../constants/icons';
 import images from '../constants/images';
 import axios from 'axios';
-import database from '@react-native-firebase/database'; 
 import { Text } from 'native-base';
-// const reference = database().ref('/users');
+import { firebase } from '@react-native-firebase/database';
+
+const database = firebase
+  .app()
+  .database('https://ecom-ddcd3-default-rtdb.asia-southeast1.firebasedatabase.app/')
+  .ref('/users');
 
 var options = {
   method: 'GET',
@@ -127,12 +131,6 @@ const redHeart = '../assets/icons/red_heart_icon.png'
 const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [isLike, setLike] = useState(true);
   const [isHiddenSale, setIsHiddenSale] = useState(true);
-  var leadsRef = database().ref('/users');
-  leadsRef.on('value', function (snapshot) {
-    // snapshot.forEach(function (childSnapshot) {
-    //   var childData = childSnapshot.val();
-    // });
-  });
 
   //@ts-ignore
   const renderItem = ({ item }) => {
@@ -140,16 +138,10 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
       <View style={styles.listItemContainer}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('Item Detail', { item: item })
-            // console.log(database())
-            // database().ref('/users').once('value', snap => console.log(snap))
-            leadsRef.on('value', function (snapshot) {
-              console.log('xx') 
-              console.log(snapshot)
-              // snapshot.forEach(function (childSnapshot) {
-              //   var childData = childSnapshot.val();
-              // });
-            });
+            database.once('value')
+              .then(snapshot => {
+                console.log('User data: ', snapshot.val());
+              });
           }
           }>
           <Image style={styles.imgItem} source={item.uri[0]} />
@@ -205,7 +197,7 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
     <Layout style={styles.container}>
       <TouchableOpacity onPress={() => navigation.navigate("Street Clothes")}>
         <ImageBackground style={styles.imgHeader} source={images.model_woman}>
-          <Text fontSize='3xl' bold  style={styles.txtCate}>Street clothes</Text>
+          <Text fontSize='3xl' bold style={styles.txtCate}>Street clothes</Text>
         </ImageBackground>
       </TouchableOpacity>
 
@@ -218,16 +210,9 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         />
 
       </View>
-      {isHiddenSale &&
-        // <ImageBackground style={styles.imgSale} source={require('../assets/images/couple_icon.jpg')}>
-        //   <Text category='h1' appearance='hint' style={{...styles.txtCate, marginTop: 400, color: colors.white}}>Fashion sale</Text>
-        //   <TouchableOpacity style={styles.checkBtn}
-        //     onPress={()=> setIsHiddenSale(false)}>
-        //     <Text category='s1' style={{color: colors.white}}>Check</Text>
-        //   </TouchableOpacity>
-        // </ImageBackground>
+      {/* {isHiddenSale &&
         <SaleBannerModal setIsHiddenSale={setIsHiddenSale} isHiddenSale={isHiddenSale} />
-      }
+      } */}
 
     </Layout>
   )

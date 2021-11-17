@@ -4,10 +4,18 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "npx react-native run-ios --simulator='iPhone 13 Pro Max'",
+    "ipad": "npx react-native run-ios --simulator='iPad Pro (11-inch) (3rd generation)'",
+    "iphonese": "npx react-native run-ios --simulator='iPhone SE (2nd generation)'",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "clean:android": "cd android && ./gradlew clean && cd ../",
+    "clean:ios": "cd ios && xcodebuild clean && cd ../",
+    "build:ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/EofficeClone/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'",
+    "env:prod": "ENV=production ./scripts/switch_env.sh",
+    "env:test": "ENV=dev ./scripts/switch_env.sh",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@eva-design/eva": "^2.1.0",

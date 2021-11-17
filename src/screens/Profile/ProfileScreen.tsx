@@ -1,17 +1,19 @@
+import { useNavigation } from "@react-navigation/native";
 import { SearchIcon, Text, Divider, ChevronRightIcon } from "native-base";
-import React from "react"
-import { View, StyleSheet, Image } from "react-native"
+import React from "react";
+import { View, StyleSheet, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { black_people } from "../../constants/images";
 
 const ProfileScreen = () => {
+    const navigation = useNavigation();
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <SearchIcon size="5" mt="0.5" color="black" style={styles.searchIcon} />
             </View>
-            <View >
+            <View>
                 <Text fontSize='4xl' bold>My profile</Text>
                 <View style={{ flexDirection: 'row' }}>
                     <Image source={black_people} style={styles.avtImg} />
@@ -22,7 +24,9 @@ const ProfileScreen = () => {
                 </View>
             </View>
 
-            <TouchableOpacity style={{ padding: 10 }}>
+            <TouchableOpacity style={{ padding: 10 }}
+                //@ts-ignore
+                onPress={() => { navigation.navigate('MyOrders') }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <View>
                         <Text fontSize='2xl' bold>My orders</Text>

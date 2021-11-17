@@ -15,11 +15,8 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import FavouriteScreen from './screens/FavouriteScreen';
 import { CheckIcon, NativeBaseProvider } from 'native-base';
-import Men from './screens/Shop/Men';
-import Women from './screens/Shop/Women';
 import ProfileScreen from './screens/Profile/ProfileScreen';
-import { Image } from 'react-native';
-import icons from './constants/icons';
+import Order from './screens/Profile/MyOrders';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -32,6 +29,17 @@ const HomeNavigator = () => {
       <Stack.Screen name="Home Screen" component={HomeScreen} />
       <Stack.Screen name="Street Clothes" component={StreetClothesScreen} />
       <Stack.Screen name="Item Detail" component={ItemDetailScreen} />
+    </Stack.Navigator>
+  )
+}
+
+const ProfileNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={{
+      headerShown: false
+    }}>
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="MyOrders" component={Order} />
     </Stack.Navigator>
   )
 }
@@ -69,7 +77,7 @@ const App = () => {
               />
               <Tab.Screen name="Bag" component={BagScreen} />
               <Tab.Screen name="Favourite" component={FavouriteScreen} />
-              <Tab.Screen name="Profile" component={ProfileScreen} />
+              <Tab.Screen name="Profile" component={ProfileNavigator} />
             </Tab.Navigator>
           </Provider>
         </NavigationContainer>
