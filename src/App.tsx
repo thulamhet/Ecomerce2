@@ -37,6 +37,17 @@ const HomeNavigator = () => {
   )
 }
 
+const ShopNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={{
+      headerShown: false
+    }}>
+      <Stack.Screen name="ShopScreen" component={Shop} />
+      <Stack.Screen name="DetailCategoryScreen" component={DetailCategoryScreen} />
+    </Stack.Navigator>
+  )
+}
+
 const App = () => {
   return (
     <ApplicationProvider {...eva} theme={{ ...eva.light }}>
@@ -65,12 +76,42 @@ const App = () => {
 
             }
             >
-              <Tab.Screen name="DetailCategoryScreen" component={DetailCategoryScreen} />
-              <Tab.Screen name="Home" component={HomeNavigator} />
-              <Tab.Screen name="Shop" component={Shop} />
-              <Tab.Screen name="Bag" component={BagScreen} />
-              <Tab.Screen name="Favourite" component={FavouriteScreen} />
-              <Tab.Screen name="Profile" component={ProfileScreen} />
+              <Tab.Screen name="Home" component={HomeNavigator}
+                options={{
+                  tabBarIcon: ({ color }) => (
+                    <Image source={icons.home} style={{ width: 25, height: 25 }} />
+                  ),
+                  title: 'Home',
+                }}
+              />
+              <Tab.Screen name="Shop" component={ShopNavigator}
+                options={{
+                  tabBarIcon: ({ color }) => (
+                    <Image source={icons.shop} style={{ width: 25, height: 25 }} />
+                  ),
+                }}
+              />
+              <Tab.Screen name="Bag" component={BagScreen}
+                options={{
+                  tabBarIcon: ({ color }) => (
+                    <Image source={icons.bag} style={{ width: 25, height: 25 }} />
+                  ),
+                }}
+              />
+              <Tab.Screen name="Favourite" component={FavouriteScreen}
+                options={{
+                  tabBarIcon: ({ color }) => (
+                    <Image source={icons.heart} style={{ width: 25, height: 25 }} />
+                  ),
+                }}
+              />
+              <Tab.Screen name="Profile" component={ProfileScreen}
+                options={{
+                  tabBarIcon: ({ color }) => (
+                    <Image source={icons.customer} style={{ width: 25, height: 25 }} />
+                  ),
+                }}
+              />
             </Tab.Navigator>
           </Provider>
         </NavigationContainer>
