@@ -218,16 +218,9 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         />
 
       </View>
-      {isHiddenSale &&
-        // <ImageBackground style={styles.imgSale} source={require('../assets/images/couple_icon.jpg')}>
-        //   <Text category='h1' appearance='hint' style={{...styles.txtCate, marginTop: 400, color: colors.white}}>Fashion sale</Text>
-        //   <TouchableOpacity style={styles.checkBtn}
-        //     onPress={()=> setIsHiddenSale(false)}>
-        //     <Text category='s1' style={{color: colors.white}}>Check</Text>
-        //   </TouchableOpacity>
-        // </ImageBackground>
+      {/* {isHiddenSale &&
         <SaleBannerModal setIsHiddenSale={setIsHiddenSale} isHiddenSale={isHiddenSale} />
-      }
+      } */}
 
     </Layout>
   )
