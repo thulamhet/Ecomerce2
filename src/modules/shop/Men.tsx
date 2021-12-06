@@ -1,26 +1,26 @@
 import { Text } from "native-base";
 import React from "react"
-import { StyleSheet, View } from "react-native"
+import { StyleSheet, View, TouchableOpacity } from "react-native"
 import colors from '../../constants/colors';
 const Men = () => {
     return (
         <View style={styles.container}>
-            <View style={{...styles.banner, justifyContent: 'center', alignItems: 'center'}}>
+            <TouchableOpacity style={{...styles.banner, justifyContent: 'center', alignItems: 'center'}}>
                 <Text fontSize='3xl' bold style={{color: '#ffff'}}>SUMMER SALES</Text>
                 <Text fontSize='xs' bold style={{color: '#ffff'}}>Up to 69% off</Text>
-            </View>
-            <View style={{...styles.banner, backgroundColor: colors.white}}>
+            </TouchableOpacity>
+            <TouchableOpacity style={{...styles.banner, backgroundColor: colors.white}}>
                 
-            </View>
-            <View style={{...styles.banner, backgroundColor: colors.white}}>
+            </TouchableOpacity>
+            <TouchableOpacity style={{...styles.banner, backgroundColor: colors.white}}>
                 
-            </View>
-            <View style={{...styles.banner, backgroundColor: colors.white}}>
+            </TouchableOpacity>
+            <TouchableOpacity style={{...styles.banner, backgroundColor: colors.white}}>
                 
-            </View>
-            <View style={{...styles.banner, backgroundColor: colors.white}}>
+            </TouchableOpacity>
+            <TouchableOpacity style={{...styles.banner, backgroundColor: colors.white}}>
                 
-            </View>
+            </TouchableOpacity>
           
         </View>
     )

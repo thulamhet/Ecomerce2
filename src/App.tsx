@@ -3,23 +3,24 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { ApplicationProvider, BottomNavigation, BottomNavigationTab, Layout, Text } from '@ui-kitten/components';
 import React from 'react';
-import HomeScreen from './screens/HomeScreen';
-import ItemDetailScreen from './screens/ItemDetailScreen';
-import TestScreen from './screens/BagScreen';
+import HomeScreen from './modules/HomeScreen';
+import ItemDetailScreen from './modules/ItemDetailScreen';
+import TestScreen from './modules/BagScreen';
 import * as eva from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import StreetClothesScreen from './screens/StreetClothesScreen';
-import Shop from './screens/Shop/ShopScreen';
-import BagScreen from './screens/BagScreen';
+import StreetClothesScreen from './modules/StreetClothesScreen';
+import Shop from './modules/shop/ShopScreen';
+import BagScreen from './modules/BagScreen';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import FavouriteScreen from './screens/FavouriteScreen';
+import FavouriteScreen from './modules/FavouriteScreen';
 import { CheckIcon, NativeBaseProvider } from 'native-base';
-import Men from './screens/Shop/Men';
-import Women from './screens/Shop/Women';
-import ProfileScreen from './screens/Profile/ProfileScreen';
+import Men from './modules/shop/Men';
+import Women from './modules/shop/Women';
+import ProfileScreen from './modules/profile/ProfileScreen';
 import { Image } from 'react-native';
 import icons from './constants/icons';
+import DetailCategoryScreen from './modules/share/DetailCategoryScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -43,8 +44,8 @@ const App = () => {
         <NavigationContainer >
           <Provider store={store}>
             <Tab.Navigator screenOptions={
-              {headerShown: false}
-              
+              { headerShown: false }
+
               // ({ route }) => ({
               //   tabBarIcon: ({ color, size }) => {
               //     // const icons = {
@@ -64,9 +65,9 @@ const App = () => {
 
             }
             >
+              <Tab.Screen name="DetailCategoryScreen" component={DetailCategoryScreen} />
               <Tab.Screen name="Home" component={HomeNavigator} />
-              <Tab.Screen name="Shop" component={Shop}
-              />
+              <Tab.Screen name="Shop" component={Shop} />
               <Tab.Screen name="Bag" component={BagScreen} />
               <Tab.Screen name="Favourite" component={FavouriteScreen} />
               <Tab.Screen name="Profile" component={ProfileScreen} />

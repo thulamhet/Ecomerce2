@@ -31,7 +31,7 @@ const Shop = () => {
         </TouchableOpacity>
         <Text fontSize='2xl' bold >Categories</Text>
         <TouchableOpacity onPress={() => { () => { } }}>
-          <SearchIcon size="5" mt="0.5" color="black" style={styles.backIcon}/>
+          <SearchIcon size="5" mt="0.5" color="black" style={styles.backIcon} />
         </TouchableOpacity>
       </View>
       <ShopNavigator />
