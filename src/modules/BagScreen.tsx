@@ -1,4 +1,4 @@
-import { Fab, Icon, MinusIcon, Text, Pl, Spinner, HStack, Heading } from "native-base";
+import { Fab, Icon, MinusIcon, Text, AddIcon, } from "native-base";
 import React from "react"
 import { View, StyleSheet, FlatList, Image, TouchableOpacity } from "react-native"
 import { connect } from "react-redux";
@@ -29,15 +29,24 @@ const BagScreen = (props: IBagScreenProps) => {
   const renderItem = ({ item }) => {
     return (
       <View style={styles.itemView}>
-        <Image source={item.uri[0]} style={{ width: 90, height: 90, borderRadius: 8 }} />
-        <View style={{ paddingHorizontal: 15 }}>
+        <Image source={item.uri[0]} style={{ width: 120, height: 120, borderTopLeftRadius: 12, borderBottomLeftRadius: 12 }} />
+        <View style={{ paddingHorizontal: 15, marginLeft: 10 }}>
           <Text fontSize='md'>{item.title}</Text>
           <View style={{ flexDirection: 'row', padding: 3 }}>
             <Text>Color: </Text>
             <Text>Size: </Text>
           </View>
-          <Text style={{ justifyContent: 'flex-end' }}>{item.price}</Text>
-        
+          <Text style={{}}>{item.price}</Text>
+          <View style={{ flexDirection: 'row' }}>
+            <TouchableOpacity style={{...styles.circle}}>
+              <MinusIcon style={{marginBottom: 8, marginRight: 2}} size="3" color="black" />
+            </TouchableOpacity>
+            <Text>2</Text>
+            <TouchableOpacity style={{...styles.circle, justifyContent: 'center'}}>
+              <AddIcon size="3" color="black" />
+            </TouchableOpacity>
+          </View>
+
           <TouchableOpacity
             style={{ position: 'absolute', top: 1, right: -20, width: 20, height: 20 }}
             onPress={() => { removeItem(item) }}>
@@ -87,16 +96,18 @@ const styles = StyleSheet.create({
   },
   itemView: {
     flex: 1,
-    paddingHorizontal: 15,
+    // paddingHorizontal: 15,
     flexDirection: 'row',
-    margin: 5,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 5,
-      height: 5
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 4,
+    marginHorizontal: 14,
+    margin: 8,
+    backgroundColor: colors.white,
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 5,
+    //   height: 5
+    // },
+    // shadowOpacity: 0.5,
+    // shadowRadius: 4,
 
   },
   coView: {
@@ -123,6 +134,22 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  circle: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 5,
+      height: 5
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+    elevation: 5,
+    borderRadius: 50,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 35,
+    height: 35,
   }
 })
 
