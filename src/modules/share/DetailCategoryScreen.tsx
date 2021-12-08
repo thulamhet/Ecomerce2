@@ -91,7 +91,7 @@ const DATA2 = [
         title: 'Super autumn sale'
     },
 ]
-const DetailCategoryScreen = () => {
+const DetailCategoryScreen = ({ navigation }) => {
     const [isSearch, setIsSearch] = useState(false);
     const [searchText, setSearchText] = useState('');
     const renderAllItem = ({ item }) => {
@@ -112,7 +112,7 @@ const DetailCategoryScreen = () => {
             <View style={styles.listItemContainer}>
                 <TouchableOpacity
                     onPress={() => {
-
+                        navigation.navigate('Item Detail', { item: item })
                     }
                     }>
                     <Image style={styles.imgItem} source={item.uri[0]} />
@@ -142,7 +142,7 @@ const DetailCategoryScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <TouchableOpacity onPress={() => setIsSearch(!isSearch)}>
+                <TouchableOpacity onPress={() => goBack()}>
                     <Image style={styles.backIcon} source={icons.back} />
                 </TouchableOpacity>
                 {isSearch ?
