@@ -91,7 +91,7 @@ const DATA2 = [
         title: 'Super autumn sale'
     },
 ]
-const DetailCategoryScreen = ({navigation: {goBack}}) => {
+const DetailCategoryScreen = ({ navigation }) => {
     const [isSearch, setIsSearch] = useState(false);
     const [searchText, setSearchText] = useState('');
     const renderAllItem = ({ item }) => {
@@ -112,7 +112,7 @@ const DetailCategoryScreen = ({navigation: {goBack}}) => {
             <View style={styles.listItemContainer}>
                 <TouchableOpacity
                     onPress={() => {
-                        goBack();
+                        navigation.navigate('Item Detail', { item: item })
                     }
                     }>
                     <Image style={styles.imgItem} source={item.uri[0]} />

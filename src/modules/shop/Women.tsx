@@ -11,7 +11,7 @@ const Women = () => {
                 style={{ ...styles.banner, justifyContent: 'center', alignItems: 'center' }}
                 onPress={() => navigation.navigate('DetailCategoryScreen')}
             >
-                <Text fontSize='3xl' bold style={{ color: '#ffff' }}>SUMMER SALES</Text>
+                <Text fontSize='3xl' bold style={{ color: '#ffff' }}>AUTUMN SALES</Text>
                 <Text fontSize='xs' bold style={{ color: '#ffff' }}>Up to 69% off</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{ ...styles.banner, backgroundColor: colors.white }}>
