@@ -5,20 +5,16 @@ import { StyleSheet, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import colors from "../../constants/colors";
 
-const Login = () => {
+const Register = () => {
     const navigation: NavigationProp<any> = useNavigation();
+
     return (
         <View style={styles.container}>
-            <Text>Login Screen</Text>
+            <Text>Register Screen</Text>
             <TouchableOpacity style={styles.registerBtn}
-                onPress={() => {navigation.navigate('RegisterScreen')}}
+                onPress={() => {navigation.navigate('LoginScreen')}}
                 >
-                <Text>Register</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.registerBtn}
-                onPress={() => {navigation.navigate('Main')}}
-                >
-                <Text>Main</Text>
+                <Text>Login</Text>
             </TouchableOpacity>
         </View>
     )
@@ -41,4 +37,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Login;
+export default Register;
