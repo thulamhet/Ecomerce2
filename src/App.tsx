@@ -70,24 +70,6 @@ const App = () => {
                     <Provider store={store}>
                         <Tab.Navigator screenOptions={
                             { headerShown: false }
-
-                            // ({ route }) => ({
-                            //   tabBarIcon: ({ color, size }) => {
-                            //     // const icons = {
-                            //     //   Home: 'home',
-                            //     //   Profile: 'account',
-                            //     // };
-
-                            //     return (
-                            //       // <Image style={{ width: 15, height: 15, resizeMode: 'cover' }} source={icons.heart} />
-                            //       <CheckIcon size="5" mt="0.5" color="emerald.500" />
-                            //     );
-                            //   },
-
-                            // }
-                            // )
-
-
                         }
                         >
                             <Tab.Screen name="Home" component={HomeNavigator}

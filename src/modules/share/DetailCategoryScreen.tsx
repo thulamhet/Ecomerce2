@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { SearchIcon, Text } from "native-base";
 import React, { useState } from "react";
 import { FlatList, Image, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
@@ -91,9 +92,11 @@ const DATA2 = [
         title: 'Super autumn sale'
     },
 ]
-const DetailCategoryScreen = ({ navigation }) => {
+const DetailCategoryScreen = ( ) => {
+    const navigation = useNavigation();
     const [isSearch, setIsSearch] = useState(false);
     const [searchText, setSearchText] = useState('');
+    //@ts-ignore
     const renderAllItem = ({ item }) => {
         return (
             <View>
@@ -106,12 +109,13 @@ const DetailCategoryScreen = ({ navigation }) => {
             </View>
         )
     }
-
+    //@ts-ignore
     const renderItem = ({ item }) => {
         return (
             <View style={styles.listItemContainer}>
                 <TouchableOpacity
                     onPress={() => {
+                        //@ts-ignore
                         navigation.navigate('Item Detail', { item: item })
                     }
                     }>
@@ -142,7 +146,7 @@ const DetailCategoryScreen = ({ navigation }) => {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <TouchableOpacity onPress={() => goBack()}>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Image style={styles.backIcon} source={icons.back} />
                 </TouchableOpacity>
                 {isSearch ?
