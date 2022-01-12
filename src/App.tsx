@@ -24,6 +24,7 @@ import DetailCategoryScreen from './modules/share/DetailCategoryScreen';
 import Login from './modules/login/Login';
 import Register from './modules/login/Register';
 
+
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 

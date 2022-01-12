@@ -1,7 +1,7 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { Fab, Icon, MinusIcon, Text, AddIcon, } from "native-base";
+import { Fab, Icon, MinusIcon, AddIcon, } from "native-base";
 import React, { useEffect, useState } from "react"
-import { View, StyleSheet, FlatList, Image, TouchableOpacity } from "react-native"
+import { View, StyleSheet, FlatList, Image, TouchableOpacity, Text } from "react-native"
 import { connect } from "react-redux";
 import colors from "../constants/colors";
 import icons from "../constants/icons";
@@ -60,13 +60,12 @@ const BagScreen = (props: IBagScreenProps) => {
         return (
             <TouchableOpacity
                 style={styles.itemView}
-                //@ts-ignore
                 onPress={() => navigation.navigate('Item Detail', { item: item })
                 }
             >
                 <Image source={item.uri[0]} style={{ width: 120, height: 120, borderTopLeftRadius: 12, borderBottomLeftRadius: 12 }} />
                 <View style={{ paddingHorizontal: 15, marginLeft: 10 }}>
-                    <Text fontSize='md'>{item.title}</Text>
+                    <Text >{item.title}</Text>
                     <View style={{ flexDirection: 'row', padding: 3 }}>
                         <Text>Color: </Text>
                         <Text>Size: </Text>
@@ -95,12 +94,9 @@ const BagScreen = (props: IBagScreenProps) => {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity
-                onPress={() => console.log(cart.items[0].uri)}
-            >
-                <Text style={{ margin: 15 }} fontSize='5xl'>My Bag</Text>
-            </TouchableOpacity>
-            <View style={{marginBottom: 212}}>
+
+            <Text style={{ margin: 15, fontSize: 25, fontWeight: 'bold' }} >My Bag</Text>
+            <View style={{ marginBottom: 212 }}>
                 <FlatList
                     data={items}
                     renderItem={renderItem}
@@ -129,8 +125,9 @@ const BagScreen = (props: IBagScreenProps) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 100,
-        backgroundColor: colors.lightGray,
+        // marginTop: 100,
+        paddingTop: 50,
+        backgroundColor: colors.white,
 
     },
     itemView: {
@@ -140,13 +137,14 @@ const styles = StyleSheet.create({
         marginHorizontal: 14,
         margin: 8,
         backgroundColor: colors.white,
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //   width: 5,
-        //   height: 5
-        // },
-        // shadowOpacity: 0.5,
-        // shadowRadius: 4,
+        shadowColor: colors.darkGray,
+        shadowOffset: {
+            width: 5,
+            height: 5
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        borderRadius: 8,
 
     },
     coView: {
