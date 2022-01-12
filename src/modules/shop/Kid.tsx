@@ -1,10 +1,14 @@
 import { useNavigation } from "@react-navigation/core";
+import { NavigationProp } from "@react-navigation/native";
 import { Text } from "native-base";
 import React from "react"
 import { StyleSheet, View, TouchableOpacity } from "react-native"
 import colors from '../../constants/colors';
 const Kid = () => {
-    const navigation = useNavigation();
+    type NewType = NavigationProp<any>;
+
+    const navigation: NewType = useNavigation();
+
     return (
         <View style={styles.container}>
             <TouchableOpacity

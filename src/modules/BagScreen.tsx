@@ -1,4 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { Fab, Icon, MinusIcon, Text, AddIcon, } from "native-base";
 import React, { useEffect, useState } from "react"
 import { View, StyleSheet, FlatList, Image, TouchableOpacity } from "react-native"
@@ -35,7 +35,8 @@ const BagScreen = (props: IBagScreenProps) => {
     }, [])
     const { cart, changeItem } = props;
     const { items } = cart;
-    const navigation = useNavigation();
+    const navigation: NavigationProp<any> = useNavigation();
+
     const storeData = async (cart: any) => {
         try {
             await AsyncStorage.setItem('@MySuperStore:key', JSON.stringify(cart));

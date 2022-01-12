@@ -1,114 +1,32 @@
 import { useNavigation } from "@react-navigation/native";
 import { SearchIcon, Text } from "native-base";
-import React, { useState } from "react";
-import { FlatList, Image, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, FlatList, Image, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import colors from "../../constants/colors";
 import icons from "../../constants/icons";
 import images from "../../constants/images";
-const listTemp = [images.woman, images.woman2, images.street_style]
+import { DATA, DATA2 } from "../constants/constant";
+import {Spinner} from 'native-base';
 
-const DATA = [
-    {
-        id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'Sport Dress',
-        uri: listTemp,
-        price: '10$',
-        sale: '10%'
-    },
-    {
-        id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-        title: 'Evening Dress',
-        uri: listTemp,
-        price: '12$',
-        sale: '10%'
-
-    },
-    {
-        id: '58694a0f-3da1-471f-bd96-145571e29d72',
-        title: 'T Dress',
-        uri: listTemp,
-        price: '1200$',
-        sale: '10%',
-
-    },
-    {
-        id: '58694a0f-3da1-471f-bd96-145571e29d74',
-        title: 'T Shirt',
-        uri: listTemp,
-        price: '1200$',
-        sale: '10%',
-
-    },
-    {
-        id: '58694a0f-3da1-471f-bd96-145571e29d32',
-        title: 'Silip Dress',
-        uri: listTemp,
-        price: '1200$',
-        sale: '10%',
-
-    },
-    {
-        id: '58694a0f-3da1-471f-bd96-145571e29d71',
-        title: 'Dau Dress',
-        uri: listTemp,
-        price: '1200$',
-        sale: '10%',
-
-    },
-];
-
-const DATA2 = [
-    {
-        id: '1',
-        category: 'Sale',
-        data: DATA,
-        title: 'Super summer sale'
-    },
-    {
-        id: '2',
-        category: 'New',
-        data: DATA,
-        title: `You've seen it before`
-
-    },
-    {
-        id: '3',
-        category: 'Hehe1',
-        data: DATA,
-        title: 'Super winter sale'
-    },
-    {
-        id: '4',
-        category: 'Hehe2',
-        data: DATA,
-        title: 'Super spring sale'
-    },
-    {
-        id: '5',
-        category: 'Hehe3',
-        data: DATA,
-        title: 'Super autumn sale'
-    },
-]
-const DetailCategoryScreen = ( ) => {
+const DetailCategoryScreen = () => {
+    const [numCols, setColumnNo] = useState(2);
+    const [isLoading, setIsLoading] = useState(true);
     const navigation = useNavigation();
     const [isSearch, setIsSearch] = useState(false);
     const [searchText, setSearchText] = useState('');
-    //@ts-ignore
-    const renderAllItem = ({ item }) => {
-        return (
-            <View>
-                <FlatList
-                    data={DATA}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.id}
-                    horizontal={true}
-                />
-            </View>
-        )
-    }
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 2000)
+    }, [])
+
+    useEffect(() => {
+        setSearchText
+    })
+    
     //@ts-ignore
     const renderItem = ({ item }) => {
         return (
@@ -129,21 +47,24 @@ const DetailCategoryScreen = ( ) => {
                 >
 
                 </TouchableOpacity>
-                <View style={{ flexDirection: 'row' }}>
-                    <Image style={{ width: 15, height: 15 }} source={icons.star} />
-                    <Image style={{ width: 15, height: 15 }} source={icons.star} />
-                    <Image style={{ width: 15, height: 15 }} source={icons.star} />
-                    <Image style={{ width: 15, height: 15 }} source={icons.star} />
-                    <Image style={{ width: 15, height: 15 }} source={icons.star} />
-                    <Text fontSize='xs'>(10)</Text>
+                <View style={{ flex: 1, padding: 5 }}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Image style={{ width: 15, height: 15 }} source={icons.star} />
+                        <Image style={{ width: 15, height: 15 }} source={icons.star} />
+                        <Image style={{ width: 15, height: 15 }} source={icons.star} />
+                        <Image style={{ width: 15, height: 15 }} source={icons.star} />
+                        <Image style={{ width: 15, height: 15 }} source={icons.star} />
+                        <Text fontSize='xs'>(10)</Text>
+                    </View>
+                    <Text fontSize='lg'>{item.title}</Text>
+                    <Text style={{ color: 'red' }}>{item.price}</Text>
                 </View>
-                <Text fontSize='lg'>{item.title}</Text>
-                <Text style={{ color: 'red' }}>{item.price}</Text>
             </View>
         )
     }
 
     return (
+
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -174,21 +95,31 @@ const DetailCategoryScreen = ( ) => {
                 </View>
             </View>
             <View>
-                <FlatList
-                    data={DATA2}
-                    renderItem={renderAllItem}
-                    keyExtractor={item => item.id}
-                />
+                {isLoading ? (
+                    <View style={{marginTop: 200}}>
+                        <Spinner accessibilityLabel="Loading posts" size={'lg'} color={'black'} />
+                    </View>
+                ) :
+                    <FlatList
+                        data={DATA}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                        // key={numCols}
+                        numColumns={numCols}
+                    />
+                }
             </View>
 
         </SafeAreaView>
+
     )
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.white,
+        // backgroundColor: colors.white,
+        marginBottom: 150
     },
     header: {
         flexDirection: 'row',
@@ -240,14 +171,20 @@ const styles = StyleSheet.create({
         color: colors.black,
     },
     listItemContainer: {
-        width: 140,
-        height: 250,
+        width: 200,
+        height: 290,
         marginRight: 10,
+        borderWidth: 0.6,
+        borderColor: colors.mildGray,
+        margin: 5,
+        borderRadius: 10,
+        justifyContent: 'center'
     },
     imgItem: {
-        width: 140,
-        height: 180,
-        borderRadius: 10,
+        width: 200,
+        height: 200,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,
     },
     saleView: {
         backgroundColor: colors.red,
@@ -261,13 +198,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     likeBtn: {
-        width: 30,
-        height: 30,
+        width: 35,
+        height: 35,
         borderRadius: 50,
         position: 'absolute',
         backgroundColor: colors.white,
-        bottom: 55,
-        right: 0,
+        bottom: 75,
+        right: -1,
         shadowColor: "#000",
         shadowOffset: {
             width: 3,
