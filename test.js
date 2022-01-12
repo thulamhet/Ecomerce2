@@ -1,3 +1,5 @@
-let p = 4;
-p = 10+ ++p;
-console.log(p)
+const a = {
+    b: 1,
+}
+a.b = 2;
+console.log(a.b)

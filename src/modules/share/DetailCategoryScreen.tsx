@@ -53,7 +53,11 @@ const DetailCategoryScreen = () => {
                 <TouchableOpacity
                     style={styles.likeBtn}
                 >
-
+                     {item.isLike ?
+                        <Image style={{ width: 15, height: 15, resizeMode: 'cover' }} source={icons.red_heart} />
+                        :
+                        <Image style={{ width: 15, height: 15, resizeMode: 'cover' }} source={icons.heart} />
+                    }
                 </TouchableOpacity>
                 <View style={{ flex: 1, padding: 5 }}>
                     <View style={{ flexDirection: 'row' }}>

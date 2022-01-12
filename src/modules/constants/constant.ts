@@ -18,7 +18,7 @@ export const DATA: product[] = [
         uri: listTemp,
         price: '10$',
         sale: '10%',
-        isLike: false,
+        isLike: true,
     },
     {
         id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',

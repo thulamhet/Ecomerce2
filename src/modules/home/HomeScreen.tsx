@@ -61,10 +61,10 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
                 <TouchableOpacity
                     style={styles.likeBtn}
                     onPress={() => setLike(!isLike)}>
-                    {isLike ?
-                        <Image style={{ width: 15, height: 15, resizeMode: 'cover' }} source={icons.heart} />
-                        :
+                    {item.isLike ?
                         <Image style={{ width: 15, height: 15, resizeMode: 'cover' }} source={icons.red_heart} />
+                        :
+                        <Image style={{ width: 15, height: 15, resizeMode: 'cover' }} source={icons.heart} />
                     }
                 </TouchableOpacity>
                 <View style={{ flexDirection: 'row' }}>
@@ -119,9 +119,9 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
                 />
 
             </View>
-            {/* {isHiddenSale &&
+            {isHiddenSale &&
         <SaleBannerModal setIsHiddenSale={setIsHiddenSale} isHiddenSale={isHiddenSale} />
-      } */}
+      }
 
         </SafeAreaProvider>
     )
