@@ -2,7 +2,16 @@ import images from "../../constants/images";
 
 const listTemp = [images.woman, images.woman2, images.street_style]
 
-export const DATA = [
+export interface product {
+    id: string,
+    title: string,
+    uri: any[],
+    price: string,
+    sale: string,
+    isLike: boolean,
+}
+
+export const DATA: product[] = [
     {
         id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
         title: 'Sport Dress',
@@ -16,7 +25,9 @@ export const DATA = [
         title: 'Evening Dress',
         uri: listTemp,
         price: '12$',
-        sale: '10%'
+        sale: '10%',
+        isLike: false,
+
 
     },
     {
@@ -25,6 +36,8 @@ export const DATA = [
         uri: listTemp,
         price: '1200$',
         sale: '10%',
+        isLike: false,
+
 
     },
     {
@@ -33,6 +46,8 @@ export const DATA = [
         uri: listTemp,
         price: '1200$',
         sale: '10%',
+        isLike: false,
+
 
     },
     {
@@ -41,6 +56,8 @@ export const DATA = [
         uri: listTemp,
         price: '1200$',
         sale: '10%',
+        isLike: false,
+
 
     },
     {
@@ -49,6 +66,8 @@ export const DATA = [
         uri: listTemp,
         price: '1200$',
         sale: '10%',
+        isLike: false,
+
 
     },
 ];

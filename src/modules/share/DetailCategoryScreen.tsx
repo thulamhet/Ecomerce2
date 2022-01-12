@@ -7,26 +7,34 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 import colors from "../../constants/colors";
 import icons from "../../constants/icons";
 import images from "../../constants/images";
-import { DATA, DATA2 } from "../constants/constant";
-import {Spinner} from 'native-base';
+import { DATA, DATA2, product } from "../constants/constant";
+import { Spinner } from 'native-base';
+import EmptyComponent from "../../components/EmptyComponent";
 
 const DetailCategoryScreen = () => {
     const [numCols, setColumnNo] = useState(2);
-    const [isLoading, setIsLoading] = useState(true);
+    const [data, setData] = useState(DATA);
+    const [isLoading, setIsLoading] = useState(false);
     const navigation = useNavigation();
     const [isSearch, setIsSearch] = useState(false);
     const [searchText, setSearchText] = useState('');
-
     useEffect(() => {
         setTimeout(() => {
-            setIsLoading(false)
+            setIsLoading(false);
         }, 2000)
     }, [])
 
     useEffect(() => {
-        setSearchText
-    })
-    
+        console.log(searchText)
+        let newArr: product[] = [];
+        for (let i = 0; i < DATA.length; i++) {
+            if (DATA[i].title.toLowerCase().includes(searchText.toLowerCase()))
+                newArr.push(DATA[i]);
+        }
+        setData([...newArr])
+        console.log(data)
+    }, [searchText])
+
     //@ts-ignore
     const renderItem = ({ item }) => {
         return (
@@ -37,7 +45,7 @@ const DetailCategoryScreen = () => {
                         navigation.navigate('Item Detail', { item: item })
                     }
                     }>
-                    <Image style={styles.imgItem} source={item.uri[0]} />
+                    {item && item.uri && item.uri[0] && <Image style={styles.imgItem} source={item.uri[0]} />}
                 </TouchableOpacity>
                 <View style={styles.saleView}>
                     <Text fontSize='xs' style={{ color: colors.white }}>{item.sale}</Text>
@@ -96,17 +104,21 @@ const DetailCategoryScreen = () => {
             </View>
             <View>
                 {isLoading ? (
-                    <View style={{marginTop: 200}}>
+                    <View style={{ marginTop: 200 }}>
                         <Spinner accessibilityLabel="Loading posts" size={'lg'} color={'black'} />
                     </View>
-                ) :
+                ) : (data.length > 0 ? 
                     <FlatList
-                        data={DATA}
+                        data={data}
                         renderItem={renderItem}
                         keyExtractor={item => item.id}
                         // key={numCols}
                         numColumns={numCols}
-                    />
+                        ListEmptyComponent={
+                            <EmptyComponent />
+                        }
+                    /> : <EmptyComponent/>
+                )
                 }
             </View>
 
