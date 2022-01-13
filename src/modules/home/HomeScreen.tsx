@@ -9,6 +9,7 @@ import { Text } from 'native-base';
 import { firebase } from '@react-native-firebase/database';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { DATA, DATA2 } from '../constants/constant';
+import auth from '@react-native-firebase/auth';
 
 const reference = firebase
   .app()

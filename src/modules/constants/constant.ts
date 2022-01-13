@@ -34,7 +34,7 @@ export const DATA: product[] = [
         id: '58694a0f-3da1-471f-bd96-145571e29d72',
         title: 'T Dress',
         uri: listTemp,
-        price: '1200$',
+        price: '32$',
         sale: '10%',
         isLike: false,
 
@@ -44,7 +44,7 @@ export const DATA: product[] = [
         id: '58694a0f-3da1-471f-bd96-145571e29d74',
         title: 'T Shirt',
         uri: listTemp,
-        price: '1200$',
+        price: '46$',
         sale: '10%',
         isLike: false,
 
@@ -54,7 +54,7 @@ export const DATA: product[] = [
         id: '58694a0f-3da1-471f-bd96-145571e29d32',
         title: 'Silip Dress',
         uri: listTemp,
-        price: '1200$',
+        price: '55$',
         sale: '10%',
         isLike: false,
 
@@ -64,7 +64,7 @@ export const DATA: product[] = [
         id: '58694a0f-3da1-471f-bd96-145571e29d71',
         title: 'Dau Dress',
         uri: listTemp,
-        price: '1200$',
+        price: '23$',
         sale: '10%',
         isLike: false,
 

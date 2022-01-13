@@ -12,13 +12,13 @@ const Tab = createMaterialTopTabNavigator();
 const ShopNavigator = () => {
     return (
         <Tab.Navigator>
-            <Tab.Screen name="Men" component={Men} />
             <Tab.Screen name="Women" component={Women} />
+            <Tab.Screen name="Men" component={Men} />
             {/* <Tab.Screen name="Kid" component={Kid} /> */}
         </Tab.Navigator>
     )
 }
-4
+
 const Shop = () => {
     const navigation: NavigationProp<any> = useNavigation();
 

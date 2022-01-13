@@ -14,7 +14,7 @@ import EmptyComponent from "../../components/EmptyComponent";
 const DetailCategoryScreen = () => {
     const [numCols, setColumnNo] = useState(2);
     const [data, setData] = useState(DATA);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const navigation = useNavigation();
     const [isSearch, setIsSearch] = useState(false);
     const [searchText, setSearchText] = useState('');
