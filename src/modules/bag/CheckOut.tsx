@@ -6,7 +6,6 @@ import colors from "../../constants/colors";
 import icons from "../../constants/icons";
 import { Fab, Icon, MinusIcon, CloseIcon, ArrowBackIcon, ChevronLeftIcon, Text } from "native-base";
 
-
 const CheckOut = () => {
     const navigation: NavigationProp<any> = useNavigation();
 

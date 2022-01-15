@@ -11,7 +11,7 @@ const Women = () => {
         <View style={styles.container}>
             <TouchableOpacity
                 style={{ ...styles.banner, justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}
-                onPress={() => navigation.navigate('DetailCategoryScreen')}
+                onPress={() => navigation.navigate('DetailCategoryScreen', {title: 'WINTER SALES'})}
             >
                 <Text fontSize='3xl' bold style={{ color: '#ffff' }}>WINTER SALES</Text>
                 <Text fontSize='xs' bold style={{ color: '#ffff' }}>Up to 69% off</Text>
