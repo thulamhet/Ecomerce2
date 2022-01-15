@@ -5,12 +5,12 @@ import { ApplicationProvider, BottomNavigation, BottomNavigationTab, Layout, Tex
 import React from 'react';
 import HomeScreen from './modules/home/HomeScreen';
 import ItemDetailScreen from './modules/ItemDetailScreen';
-import TestScreen from './modules/BagScreen';
+import TestScreen from './modules/bag/BagScreen';
 import * as eva from '@eva-design/eva';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import StreetClothesScreen from './modules/StreetClothesScreen';
 import Shop from './modules/shop/ShopScreen';
-import BagScreen from './modules/BagScreen';
+import BagScreen from './modules/bag/BagScreen';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import FavouriteScreen from './modules/FavouriteScreen';
@@ -23,6 +23,8 @@ import icons from './constants/icons';
 import DetailCategoryScreen from './modules/share/DetailCategoryScreen';
 import Login from './modules/login/Login';
 import Register from './modules/login/Register';
+import CheckOut from './modules/bag/CheckOut';
+
 
 
 const Tab = createBottomTabNavigator();
@@ -59,6 +61,7 @@ const BagNavigator = () => {
         }}>
             <Stack.Screen name="BagScreen" component={BagScreen} />
             <Stack.Screen name="Item Detail" component={ItemDetailScreen} />
+            <Stack.Screen name="CheckOut" component={CheckOut} />
         </Stack.Navigator>
     )
 }
