@@ -51,25 +51,33 @@ const CheckOut = () => {
                         <View style={{ ...styles.addressView, width: 120, height: 80, padding: 2, paddingHorizontal: 2 }}>
                             <Image source={{ uri: 'https://assets.parcelperform.com/pp-web-app-assets/logo-carriers/square-logo-carries/uspsgl.png' }} style={{ width: 120, height: 70 }} />
                         </View>
-                        
+
                         <View style={{ ...styles.addressView, width: 120, height: 80, padding: 2, paddingHorizontal: 2 }}>
                             <Image source={{ uri: 'https://gatewayexpress.vn/wp-content/uploads/2020/07/logo-dhl-1.png' }} style={{ width: 115, height: 70 }} />
                         </View>
 
                     </View>
-                        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 12, marginHorizontal: 8}}>
-                            <Text style={{color: colors.mildGray, fontSize: 16, fontWeight: '400'}}>Order: </Text>
-                            <Text style={{fontSize: 16, fontWeight: '600'}}>112$</Text>
-                        </View>
-                        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 12, marginHorizontal: 8}}>
-                            <Text style={{color: colors.mildGray, fontSize: 16, fontWeight: '400'}}>Delivery: </Text>
-                            <Text style={{fontSize: 16, fontWeight: '600'}}>112$</Text>
-                        </View>
-                        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 12, marginHorizontal: 8}}>
-                            <Text style={{color: colors.mildGray, fontSize: 20, fontWeight: '800'}}>Summary: </Text>
-                            <Text style={{fontSize: 20, fontWeight: '800'}}>112$</Text>
-                        </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 12, marginHorizontal: 8 }}>
+                        <Text style={{ color: colors.mildGray, fontSize: 16, fontWeight: '400' }}>Order: </Text>
+                        <Text style={{ fontSize: 16, fontWeight: '600' }}>110$</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 12, marginHorizontal: 8 }}>
+                        <Text style={{ color: colors.mildGray, fontSize: 16, fontWeight: '400' }}>Delivery: </Text>
+                        <Text style={{ fontSize: 16, fontWeight: '600' }}>15$</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginVertical: 12, marginHorizontal: 8 }}>
+                        <Text style={{ color: colors.mildGray, fontSize: 20, fontWeight: '800' }}>Summary: </Text>
+                        <Text style={{ fontSize: 20, fontWeight: '800' }}>125$</Text>
+                    </View>
+                    <TouchableOpacity
+                        style={styles.coBtn}
+                        onPress={() => {
 
+                            navigation.navigate('Success')
+
+                        }}>
+                        <Text style={{ color: colors.white }}>CHECK OUT</Text>
+                    </TouchableOpacity>
 
                 </View>
             </View>
@@ -84,6 +92,33 @@ const styles = StyleSheet.create({
         flex: 1,
         // backgroundColor: colors.white,
         marginBottom: 150,
+    },
+    coView: {
+        backgroundColor: colors.lighterGray,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        // height: 112,
+        position: 'absolute',
+        bottom: 0,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 5,
+        //     height: 5
+        // },
+        // shadowOpacity: 0.5,
+        // shadowRadius: 4,
+        // elevation: 5,
+    },
+    coBtn: {
+        backgroundColor: colors.green2,
+        width: 348,
+        height: 48,
+        borderRadius: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20,
+        alignSelf: 'center'
     },
     header: {
         flexDirection: 'row',

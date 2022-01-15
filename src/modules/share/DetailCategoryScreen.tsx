@@ -1,5 +1,5 @@
-import { useNavigation } from "@react-navigation/native";
-import { SearchIcon, Text } from "native-base";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { ChevronLeftIcon, SearchIcon, Text } from "native-base";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Image, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -7,17 +7,20 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 import colors from "../../constants/colors";
 import icons from "../../constants/icons";
 import images from "../../constants/images";
-import { DATA, DATA2, product } from "../constants/constant";
+import { DATA, DATA2, DATAg, DATAt, product } from "../constants/constant";
 import { Spinner } from 'native-base';
 import EmptyComponent from "../../components/EmptyComponent";
 
 const DetailCategoryScreen = () => {
     const [numCols, setColumnNo] = useState(2);
-    const [data, setData] = useState(DATA);
+    const [data, setData] = useState(DATAg);
     const [isLoading, setIsLoading] = useState(true);
     const navigation = useNavigation();
     const [isSearch, setIsSearch] = useState(false);
     const [searchText, setSearchText] = useState('');
+    const [isHighLow, setIsHighLow] = useState(true);
+    const route = useRoute();
+    const { title } = route.params;
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false);
@@ -35,6 +38,12 @@ const DetailCategoryScreen = () => {
         console.log(data)
     }, [searchText])
 
+    useEffect(() => {
+        if(isHighLow)
+        setData([...DATAt])
+        else setData([...DATAg])
+    }, [isHighLow])
+
     //@ts-ignore
     const renderItem = ({ item }) => {
         return (
@@ -45,7 +54,7 @@ const DetailCategoryScreen = () => {
                         navigation.navigate('Item Detail', { item: item })
                     }
                     }>
-                    {item && item.uri && item.uri[0] && <Image style={styles.imgItem} source={item.uri[0]} />}
+                    {item && item.uri && <Image style={styles.imgItem} source={[item.uri]} />}
                 </TouchableOpacity>
                 <View style={styles.saleView}>
                     <Text fontSize='xs' style={{ color: colors.white }}>{item.sale}</Text>
@@ -53,7 +62,7 @@ const DetailCategoryScreen = () => {
                 <TouchableOpacity
                     style={styles.likeBtn}
                 >
-                     {item.isLike ?
+                    {item.isLike ?
                         <Image style={{ width: 15, height: 15, resizeMode: 'cover' }} source={icons.red_heart} />
                         :
                         <Image style={{ width: 15, height: 15, resizeMode: 'cover' }} source={icons.heart} />
@@ -69,7 +78,7 @@ const DetailCategoryScreen = () => {
                         <Text fontSize='xs'>(10)</Text>
                     </View>
                     <Text fontSize='lg'>{item.title}</Text>
-                    <Text style={{ color: 'red' }}>{item.price}</Text>
+                    <Text style={{ color: 'red' }}>{item.price}$</Text>
                 </View>
             </View>
         )
@@ -79,9 +88,9 @@ const DetailCategoryScreen = () => {
 
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Image style={styles.backIcon} source={icons.back} />
-                </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.goBack()} >
+                        <ChevronLeftIcon size="5" mt="0.5" color="black" style={styles.backIcon} />
+                    </TouchableOpacity>
                 {isSearch ?
                     <Text fontSize='2xl' bold >Categories</Text>
                     :
@@ -94,24 +103,26 @@ const DetailCategoryScreen = () => {
                     </View>
                 }
                 <TouchableOpacity onPress={() => { () => { } }}>
-                    <SearchIcon size="5" mt="0.5" color="black" style={styles.backIcon} />
+                    {/* <SearchIcon size="5" mt="0.5" color="black" style={styles.backIcon} /> */}
                 </TouchableOpacity>
             </View>
             <View style={styles.filterView}>
-                <Text fontSize='3xl' bold>Woman'sTops</Text>
-                <View style={styles.filter}>
-                    <Image style={styles.backIcon} source={icons.filter} />
-                    <Text fontWeight={300}>Filter</Text>
-                    <Image style={{ ...styles.backIcon, marginLeft: 60 }} source={icons.updown} />
-                    <Text fontWeight={300}>Price: highest to low</Text>
-                </View>
+                <Text style={{ fontWeight: '800', fontSize: 22, margin: 10 }}>{title}</Text>
+                <TouchableOpacity style={styles.filter}
+                    onPress={() => {
+                        setIsHighLow(!isHighLow);
+                    }}
+                >
+                    <Image style={{ marginLeft: 10, width: 25, height: 25, alignSelf: 'center' }} source={icons.updown} />
+                    <Text style={{ fontWeight: '400', alignSelf: 'center', margin: 8 }}>Price: highest to low</Text>
+                </TouchableOpacity>
             </View>
             <View>
                 {isLoading ? (
                     <View style={{ marginTop: 200 }}>
                         <Spinner accessibilityLabel="Loading posts" size={'lg'} color={'black'} />
                     </View>
-                ) : (data.length > 0 ? 
+                ) : (data.length > 0 ?
                     <FlatList
                         data={data}
                         renderItem={renderItem}
@@ -121,7 +132,7 @@ const DetailCategoryScreen = () => {
                         ListEmptyComponent={
                             <EmptyComponent />
                         }
-                    /> : <EmptyComponent/>
+                    /> : <EmptyComponent />
                 )
                 }
             </View>
@@ -135,7 +146,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         // backgroundColor: colors.white,
-        marginBottom: 150
+        marginBottom: 10
     },
     header: {
         flexDirection: 'row',
@@ -158,13 +169,13 @@ const styles = StyleSheet.create({
     searchView: {
         flexDirection: 'row',
         alignItems: 'center',
-        borderRadius: 20,
+        borderRadius: 12,
         borderWidth: 0.2,
-        borderColor: Colors.LightGray,
+        borderColor: colors.mildGray,
         margin: 10,
         flex: 1,
         height: 40,
-        padding: 10,
+        padding: 8,
     },
     filterView: {
         padding: 10,
@@ -174,7 +185,7 @@ const styles = StyleSheet.create({
     },
     filter: {
         flexDirection: 'row',
-        backgroundColor: colors.lightGray
+        backgroundColor: colors.lighterGray
     },
 
     imgHeader: {
@@ -197,7 +208,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     imgItem: {
-        width: 200,
+        width: 198,
         height: 200,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,

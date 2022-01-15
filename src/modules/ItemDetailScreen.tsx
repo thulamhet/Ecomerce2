@@ -8,7 +8,7 @@ import { changeItem } from '../redux/action/cartAction';
 import database from '@react-native-firebase/database';
 import { connect } from 'react-redux';
 import Annouce from '../components/PopAnnounce';
-import { Alert, SearchIcon, Text } from 'native-base';
+import { Alert, ChevronLeftIcon, SearchIcon, Text } from 'native-base';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 interface IItemDetailScreenProps {
     route: any,
@@ -26,7 +26,7 @@ const ItemDetailScreen = (props: IItemDetailScreenProps) => {
     const renderItem = ({ item }) => {
         return (
             <View style={{ width: 275, height: 413, marginVertical: 10, marginRight: 5 }}>
-                <Image source={item} style={{ flex: 1, width: 275, height: 413, borderRadius: 2 }} />
+                <Image source={{ uri: item.uri }} style={{ flex: 1, width: 275, height: 413, borderRadius: 2 }} />
             </View>
         )
     }
@@ -37,8 +37,15 @@ const ItemDetailScreen = (props: IItemDetailScreenProps) => {
         'L',
         'XL',
     ];
+    const data2 = [
+        'Red',
+        'Blue',
+        'Black',
+        'Yellow',
+        'White',
+    ];
     const displaySizeValue = data[selectedSize.row];
-    const displayColorValue = data[selectedColor.row];
+    const displayColorValue = data2[selectedColor.row];
 
     //@ts-ignore
     const renderOption = (title) => (
@@ -51,9 +58,9 @@ const ItemDetailScreen = (props: IItemDetailScreenProps) => {
         try {
             await AsyncStorage.setItem('@MySuperStore:key', JSON.stringify(cart));
         } catch (e) {
-          // saving error
+            // saving error
         }
-      }
+    }
 
     const addToBag = () => {
         let updateItem = {}
@@ -70,26 +77,25 @@ const ItemDetailScreen = (props: IItemDetailScreenProps) => {
     return (
         <Layout style={styles.container}>
             <View style={styles.headerContainer}>
-                <TouchableOpacity onPress={() => { navigation.goBack() }}>
-                    <Image style={styles.backIcon} source={icons.back} />
+                <TouchableOpacity
+                    style={{ margin: 5 }}
+                    onPress={() => { navigation.goBack() }}>
+                    <ChevronLeftIcon size="5" mt="0.5" color="black" style={styles.backIcon} />
                 </TouchableOpacity>
-                <Text fontSize='2xl' bold style={styles.title}>Short dress</Text>
+                <Text style={styles.title}>Sport Dress</Text>
                 <TouchableOpacity onPress={() => { console.log(item.uri) }}>
-                    <SearchIcon size="5" color='black' />
+                    {/* <SearchIcon size="5" color='black' /> */}
                 </TouchableOpacity>
             </View>
 
+
             <View style={{ height: 413 }}>
-                <FlatList
-                    data={item.uri}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.uri}
-                    horizontal={true}
-                />
+                <Image source={{ uri: item.uri }} style={{  width: '120%', height: 400, borderRadius: 2 }} />
+
             </View>
 
             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', padding: 15 }}>
-                <Text>Size:</Text>
+                <Text style={{ color: colors.darkGray, fontSize: 16, fontWeight: '600' }}>Size:</Text>
                 <Select
                     style={styles.select}
                     placeholder='Default'
@@ -98,7 +104,7 @@ const ItemDetailScreen = (props: IItemDetailScreenProps) => {
                     onSelect={index => setSelectedSize(index)}>
                     {data.map(renderOption)}
                 </Select>
-                <Text>Color:</Text>
+                <Text style={{ fontWeight: '600', fontSize: 16 }}>Color:</Text>
                 <Select
                     style={styles.select}
                     placeholder='Default'
@@ -112,9 +118,11 @@ const ItemDetailScreen = (props: IItemDetailScreenProps) => {
             <View style={styles.infoView}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={styles.brand}>H&M</Text>
-                    <Text style={styles.brand}>{item.price}</Text>
+                    <Text style={styles.brand}>{item.price}$</Text>
                 </View>
                 <Text>{item.title}</Text>
+                <Text style={{ marginTop: 20, fontWeight: '600', color: colors.mildGray }}>This is sport dressssssss</Text>
+
             </View>
 
             <View style={styles.addView}>
@@ -149,6 +157,10 @@ const styles = StyleSheet.create({
     title: {
         // fontSize: 24,
         // fontWeight: 'bold',
+        fontSize: 22,
+        fontWeight: '500',
+        alignSelf: 'center',
+        marginTop: 4
     },
     select: {
         width: 150,
@@ -163,7 +175,7 @@ const styles = StyleSheet.create({
     },
     brand: {
         fontWeight: 'bold',
-        fontSize: 24,
+        fontSize: 22,
     },
     addView: {
         backgroundColor: colors.white,
@@ -190,7 +202,17 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         justifyContent: 'center',
         alignItems: 'center',
-    }
+    },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        // backgroundColor: colors.white,
+        height: 60,
+        borderBottomWidth: 1,
+        borderColor: colors.lightGray
+
+    },
 })
 
 const mapStateToProps = (state: any) => {

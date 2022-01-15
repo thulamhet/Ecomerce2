@@ -16,6 +16,7 @@ interface IBagScreenProps {
 const BagScreen = (props: IBagScreenProps) => {
     // const [items, setItems] = useState([]);
     const [count, setCount] = useState(1);
+    const [total, setTotal] = useState(55);
     useEffect(() => {
         const getData = async () => {
             try {
@@ -63,7 +64,7 @@ const BagScreen = (props: IBagScreenProps) => {
                 style={styles.itemView}
 
             >
-                <Image source={item.uri[0]} style={{ width: 130, height: 130, borderTopLeftRadius: 12, borderBottomLeftRadius: 12 }} />
+                <Image source={[item.uri]} style={{ width: 130, height: 130, borderTopLeftRadius: 12, borderBottomLeftRadius: 12 }} />
                 <View style={{ paddingHorizontal: 15, marginLeft: 10 }}>
                     <Text style={{ fontSize: 20, fontWeight: '600', marginTop: 4 }}>{item.title}</Text>
 
@@ -77,7 +78,11 @@ const BagScreen = (props: IBagScreenProps) => {
                     <View style={{ flexDirection: 'row', marginTop: 12 }}>
                         <TouchableOpacity style={{ ...styles.circle }}
                             onPress={() => {
-                                count >= 1 && setCount(count - 1);
+                                if (count >= 1) {
+                                    setCount(count - 1);
+                                    setTotal(total - 55);
+                                }
+
                             }}
                         >
                             <MinusIcon style={{ marginBottom: 8, marginRight: 2 }} size="3" color="black" />
@@ -90,12 +95,17 @@ const BagScreen = (props: IBagScreenProps) => {
                         }}>{count}</Text>
 
                         <TouchableOpacity style={{ ...styles.circle, justifyContent: 'center' }}
-                            onPress={() => setCount(count + 1)}
+                            onPress={() => {
+                                setCount(count + 1)
+                                setTotal(total + 55);
+                            }
+
+                            }
                         >
                             <AddIcon size="3" color="black" />
                         </TouchableOpacity>
 
-                        <Text style={{ marginLeft: 70, marginTop: 10, fontSize: 14 }}>{item.price}</Text>
+                        <Text style={{ marginLeft: 70, marginTop: 10, fontSize: 14 }}>{item.price}$</Text>
 
                     </View>
 
@@ -131,9 +141,9 @@ const BagScreen = (props: IBagScreenProps) => {
                 />
             </View>
             <View style={styles.coView}>
-                <View style={{flexDirection: 'row'}}>
+                <View style={{ flexDirection: 'row' }}>
                     <Text style={{ marginBottom: 40, fontSize: 20, fontWeight: '600', color: colors.mildGray, marginLeft: 0 }}>Total amount: </Text>
-                    <Text style={{ marginBottom: 40,  fontSize: 20, fontWeight: '600', marginLeft: 210}}>113$ </Text>
+                    <Text style={{ marginBottom: 40, fontSize: 20, fontWeight: '600', marginLeft: 210 }}>{total}$</Text>
                 </View>
                 <TouchableOpacity
                     style={styles.coBtn}

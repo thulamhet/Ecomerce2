@@ -17,14 +17,19 @@ const Women = () => {
                 <Text fontSize='xs' bold style={{ color: '#ffff' }}>Up to 69% off</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{ ...styles.banner, backgroundColor: colors.white }}>
+            <TouchableOpacity style={{ ...styles.banner, backgroundColor: colors.white }}
+                onPress={() => navigation.navigate('DetailCategoryScreen', {title: 'NEW'})}
+
+            >
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ fontSize: 22, fontWeight: '600' }}>NEW</Text>
                 </View>
                 <Image style={styles.img} source={{ uri: 'https://i.pinimg.com/474x/98/28/24/9828246ca8bdbdb6839c749f46b8c481.jpg' }} />
             </TouchableOpacity>
 
-            <TouchableOpacity style={{ ...styles.banner, backgroundColor: colors.white }}>
+            <TouchableOpacity style={{ ...styles.banner, backgroundColor: colors.white }}
+                onPress={() => navigation.navigate('DetailCategoryScreen', {title: 'STREET'})}
+                >
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{ fontSize: 22, fontWeight: '600' }}>STREET</Text>
                 </View>

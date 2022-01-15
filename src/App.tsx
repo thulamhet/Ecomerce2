@@ -24,6 +24,7 @@ import DetailCategoryScreen from './modules/share/DetailCategoryScreen';
 import Login from './modules/login/Login';
 import Register from './modules/login/Register';
 import CheckOut from './modules/bag/CheckOut';
+import Success from './modules/bag/Success';
 
 
 
@@ -62,6 +63,7 @@ const BagNavigator = () => {
             <Stack.Screen name="BagScreen" component={BagScreen} />
             <Stack.Screen name="Item Detail" component={ItemDetailScreen} />
             <Stack.Screen name="CheckOut" component={CheckOut} />
+            <Stack.Screen name="Success" component={Success} />
         </Stack.Navigator>
     )
 }

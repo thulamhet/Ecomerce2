@@ -54,7 +54,7 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
                           });
                     }
                     }>
-                    <Image style={styles.imgItem} source={item.uri[0]} />
+                    <Image style={styles.imgItem} source={[item.uri]} />
                 </TouchableOpacity>
                 <View style={styles.saleView}>
                     <Text fontSize='xs' style={{ color: colors.white }}>{item.sale}</Text>
@@ -77,7 +77,7 @@ const HomeScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
                     <Text fontSize='xs'>(10)</Text>
                 </View>
                 <Text fontSize='lg'>{item.title}</Text>
-                <Text style={{ color: 'red' }}>{item.price}</Text>
+                <Text style={{ color: 'red' }}>{item.price}$</Text>
             </View>
         )
     }
