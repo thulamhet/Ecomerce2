@@ -7,6 +7,7 @@ export const model_woman = require('../assets/images/model_woman.jpeg');
 export const street_style = require('../assets/images/street_style.jpg');
 export const woman = require('../assets/images/woman.jpg');
 export const woman2 = require('../assets/images/woman2.jpg');
+export const empty = require('../assets/images/empty_data.png');
 
 export default {
   black_people,
@@ -18,4 +19,5 @@ export default {
   model_woman,
   woman,
   woman2,
+  empty
 }

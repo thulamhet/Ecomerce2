@@ -5,6 +5,11 @@ export const back = require('../assets/icons/back_icon.png');
 export const vector = require('../assets/icons/vector_icon.png');
 export const filter = require('../assets/icons/filter_icon.png');
 export const updown = require('../assets/icons/updown_icon.png');
+export const home = require('../assets/icons/home_icon.png');
+export const shop = require('../assets/icons/shop_icon.png');
+export const bag = require('../assets/icons/bag_icon.png');
+export const customer = require('../assets/icons/customer_icon.png');
+
 
 export default {
   star,
@@ -13,5 +18,9 @@ export default {
   back,
   vector,
   filter,
-  updown
+  updown,
+  home,
+  shop,
+  bag,
+  customer
 }

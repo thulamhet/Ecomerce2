@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     width: '100%',
-    height: 520,
+    height: 550,
   },
   checkBtn: {
     backgroundColor: colors.green2,
